@@ -1,0 +1,24 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Node
+node_modules/
+package-lock.json
+
+# Build
+dist/
+build/
+*.zip
+*.crx
+*.pem
+
+# Environment
+.env
+.env.*

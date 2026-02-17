@@ -1,0 +1,86 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Suspender: Save Memory & Speed Up Chrome | Zovo",
+  "version": "1.0.0",
+  "description": "The trusted tab suspender that saves memory and speeds up Chrome. No malware. No tracking. Just savings.",
+  "action": {
+    "default_title": "Tab Suspender",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "tabGroups",
+    "scripting",
+    "contextMenus",
+    "notifications"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "contentScript.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "suspended.html",
+        "icons/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_page": "settings.html",
+  "commands": {
+    "suspend_current": {
+      "suggested_key": {
+        "default": "Alt+S"
+      },
+      "description": "Suspend current tab"
+    },
+    "suspend_others": {
+      "suggested_key": {
+        "default": "Alt+Shift+S"
+      },
+      "description": "Suspend all other tabs"
+    },
+    "restore_all": {
+      "suggested_key": {
+        "default": "Alt+R"
+      },
+      "description": "Restore all tabs"
+    },
+    "whitelist_site": {
+      "suggested_key": {
+        "default": "Alt+W"
+      },
+      "description": "Whitelist current site"
+    }
+  }
+}

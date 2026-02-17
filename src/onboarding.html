@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Tab Suspender</title>
+    <link rel="stylesheet" href="onboarding.css">
+</head>
+
+<body>
+    <div class="onboarding-container">
+        <!-- Background -->
+        <div class="bg-gradient"></div>
+        <div class="bg-particles" id="particles"></div>
+
+        <!-- Progress bar -->
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <!-- Steps container -->
+        <div class="steps-container" id="stepsContainer">
+
+            <!-- Step 1: Welcome -->
+            <section class="step active" data-step="1">
+                <div class="step-content">
+                    <div class="hero-icon">
+                        <img src="icons/icon128.png" alt="Tab Suspender">
+                    </div>
+                    <h1 class="hero-title">Take Control of Chrome's Memory</h1>
+                    <p class="hero-desc">
+                        The average user with 30+ tabs uses over <strong>4GB of RAM</strong>.
+                        Tab Suspender intelligently suspends inactive tabs to free up memory
+                        and keep your computer running fast.
+                    </p>
+
+                    <!-- Real-time Memory Usage -->
+                    <div class="memory-monitor" id="memoryMonitor">
+                        <div class="memory-header">
+                            <span class="memory-label">Current Memory Usage</span>
+                            <span class="memory-percentage" id="memoryPercentage">Loading...</span>
+                        </div>
+                        <div class="memory-bar">
+                            <div class="memory-fill" id="memoryFill"></div>
+                        </div>
+                        <div class="memory-details">
+                            <span id="memoryDetails">Analyzing your browser...</span>
+                        </div>
+                        <div class="potential-savings">
+                            <span class="savings-label">Potential savings with Tab Suspender:</span>
+                            <span class="savings-amount" id="potentialSavings">--</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-preview">
+                        <div class="stat-item">
+                            <span class="stat-number">2-4 GB</span>
+                            <span class="stat-label">Average Daily Savings</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">50%</span>
+                            <span class="stat-label">Faster Browser</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Data Preserved</span>
+                        </div>
+                    </div>
+
+                    <div class="trust-badges">
+                        <div class="badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            No Tracking
+                        </div>
+                        <div class="badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            100% Private
+                        </div>
+                        <div class="badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            Open Source
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Step 2: Migration (conditional) -->
+            <section class="step" data-step="2">
+                <div class="step-content">
+                    <div class="migration-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path
+                                d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 0 1 9-9">
+                            </path>
+                        </svg>
+                    </div>
+                    <h2 id="migrationTitle">Welcome Back!</h2>
+                    <p class="step-desc" id="migrationDesc">
+                        We're the trusted successor to The Great Suspender. Same workflow,
+                        no malware, no tracking. Just memory savings.
+                    </p>
+
+                    <div id="greatSuspenderDetected" class="migration-detected" style="display: none;">
+                        <div class="detection-badge">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <polyline points="12 6 12 12 16 14"></polyline>
+                            </svg>
+                            Great Suspender settings detected
+                        </div>
+                        <button class="import-btn" id="importSettingsBtn">
+                            Import Settings from Great Suspender
+                        </button>
+                    </div>
+
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Open source and auditable</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>No data collection, ever</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Same keyboard shortcuts</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>2 million users needed a new home</span>
+                        </div>
+                        <div class="feature-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            <span><a href="#" class="source-link" id="viewSourceLink">View source code</a></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Step 3: Quick Setup with Permissions -->
+            <section class="step" data-step="3">
+                <div class="step-content">
+                    <h2>Quick Setup</h2>
+                    <p class="step-desc">Configure how Tab Suspender works for you</p>
+
+                    <div class="setup-options">
+                        <div class="option-group">
+                            <label class="option-label">Suspend tabs after</label>
+                            <div class="option-control">
+                                <input type="range" id="setupTimeout" min="5" max="120" value="30" class="slider">
+                                <span class="slider-value" id="setupTimeoutValue">30 min</span>
+                            </div>
+                        </div>
+
+                        <div class="option-group">
+                            <label class="option-label">Essential whitelist</label>
+                            <div class="whitelist-chips">
+                                <label class="chip">
+                                    <input type="checkbox" checked data-domain="mail.google.com">
+                                    <span>Gmail</span>
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" checked data-domain="calendar.google.com">
+                                    <span>Calendar</span>
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" checked data-domain="docs.google.com">
+                                    <span>Docs</span>
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" data-domain="github.com">
+                                    <span>GitHub</span>
+                                </label>
+                                <label class="chip">
+                                    <input type="checkbox" data-domain="slack.com">
+                                    <span>Slack</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="option-group toggles">
+                            <label class="toggle-option">
+                                <span>Never suspend tabs playing audio</span>
+                                <label class="toggle">
+                                    <input type="checkbox" id="setupAudio" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </label>
+                            <label class="toggle-option">
+                                <span>Never suspend tabs with unsaved forms</span>
+                                <label class="toggle">
+                                    <input type="checkbox" id="setupForms" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </label>
+                            <label class="toggle-option">
+                                <span>Never suspend pinned tabs</span>
+                                <label class="toggle">
+                                    <input type="checkbox" id="setupPinned" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Permissions Explanation -->
+                    <div class="permissions-section">
+                        <h3>Why We Need These Permissions</h3>
+                        <div class="permission-items">
+                            <div class="permission-item">
+                                <div class="permission-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                        <line x1="9" y1="9" x2="15" y2="9"></line>
+                                        <line x1="9" y1="15" x2="15" y2="15"></line>
+                                    </svg>
+                                </div>
+                                <div class="permission-text">
+                                    <strong>tabs</strong> - To see which tabs to suspend and restore
+                                </div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                                        <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                                        <polyline points="7 3 7 8 15 8"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="permission-text">
+                                    <strong>storage</strong> - To remember your settings and whitelist
+                                </div>
+                            </div>
+                            <div class="permission-item">
+                                <div class="permission-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                                    </svg>
+                                </div>
+                                <div class="permission-text">
+                                    <strong>scripting</strong> - To suspend tabs with custom placeholders
+                                </div>
+                            </div>
+                        </div>
+                        <p class="permission-note">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                            All data stays on your device. We never collect or transmit any data.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- Step 4: See it work -->
+            <section class="step" data-step="4">
+                <div class="step-content">
+                    <h2>See It Work</h2>
+                    <p class="step-desc">Watch Tab Suspender in action</p>
+
+                    <div class="demo-container">
+                        <div class="demo-tabs" id="demoTabs">
+                            <div class="demo-tab active">
+                                <div class="demo-favicon"></div>
+                                <span>Current Tab</span>
+                                <span class="demo-status active">Active</span>
+                            </div>
+                            <div class="demo-tab" id="demoTab1">
+                                <div class="demo-favicon"></div>
+                                <span>Example Tab 1</span>
+                                <span class="demo-status idle">Idle</span>
+                            </div>
+                            <div class="demo-tab" id="demoTab2">
+                                <div class="demo-favicon"></div>
+                                <span>Example Tab 2</span>
+                                <span class="demo-status idle">Idle</span>
+                            </div>
+                        </div>
+
+                        <div class="demo-action">
+                            <button class="demo-btn" id="demoBtn">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="6" y="4" width="4" height="16"></rect>
+                                    <rect x="14" y="4" width="4" height="16"></rect>
+                                </svg>
+                                Suspend Inactive Tabs
+                            </button>
+                        </div>
+
+                        <div class="demo-result hidden" id="demoResult">
+                            <div class="result-icon">
+                                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <span class="result-text" id="demoResultText">2 tabs suspended • ~100 MB saved</span>
+                        </div>
+                    </div>
+
+                    <p class="demo-note">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Suspended tabs restore instantly when you click on them
+                    </p>
+                </div>
+            </section>
+            <!-- Step 5: Complete with Progressive Discovery -->
+            <section class="step" data-step="5">
+                <div class="step-content">
+                    <div class="complete-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                    </div>
+                    <h2>You're All Set!</h2>
+                    <p class="step-desc">
+                        Tab Suspender is now working in the background.
+                        Click the extension icon anytime to see your tabs and memory savings.
+                    </p>
+
+                    <div class="progressive-discovery">
+                        <h3>New Features Coming Soon</h3>
+                        <div class="feature-timeline">
+                            <div class="timeline-item unlocked">
+                                <div class="timeline-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                                <div class="timeline-content">
+                                    <strong>Week 1</strong>
+                                    <p>Advanced tab grouping with smart organization</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item locked">
+                                <div class="timeline-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <div class="timeline-content">
+                                    <strong>Week 2</strong>
+                                    <p>Focus mode for deep work sessions</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item locked">
+                                <div class="timeline-icon">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <div class="timeline-content">
+                                    <strong>Week 3</strong>
+                                    <p>Detailed statistics and insights dashboard</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="shortcuts-preview">
+                        <h3>Keyboard Shortcuts</h3>
+                        <div class="shortcut-list">
+                            <div class="shortcut-item">
+                                <kbd>Alt</kbd> + <kbd>S</kbd>
+                                <span>Suspend current tab</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>
+                                <span>Suspend other tabs</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Alt</kbd> + <kbd>R</kbd>
+                                <span>Restore all tabs</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Alt</kbd> + <kbd>W</kbd>
+                                <span>Whitelist current site</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-btn back" id="backBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back
+            </button>
+            <div class="step-dots" id="stepDots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <button class="nav-btn next" id="nextBtn">
+                Next
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Skip link -->
+        <a href="#" class="skip-link" id="skipLink">Skip setup</a>
+    </div>
+
+    <!-- Milestone Notification Template -->
+    <div class="milestone-notification" id="milestoneNotification" style="display: none;">
+        <div class="milestone-content">
+            <div class="milestone-icon">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                </svg>
+            </div>
+            <div class="milestone-text">
+                <strong id="milestoneTitle">Milestone Reached!</strong>
+                <p id="milestoneMessage">You've saved 1 GB of RAM!</p>
+            </div>
+            <button class="milestone-close" id="milestoneClose">×</button>
+        </div>
+    </div>
+
+    <script src="onboarding.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Tab Suspended</title>
+    <link rel="icon" id="pageFavicon" type="image/x-icon" href="">
+    <link rel="stylesheet" href="suspended.css">
+</head>
+
+<body>
+    <div class="suspended-container">
+        <!-- Background decoration -->
+        <div class="bg-gradient"></div>
+        <div class="bg-grid"></div>
+
+        <!-- Main content -->
+        <div class="content">
+            <!-- Favicon and Title -->
+            <div class="tab-info">
+                <img id="favicon" class="favicon" src="" alt="">
+                <h1 id="tabTitle" class="tab-title">Loading...</h1>
+                <p id="tabUrl" class="tab-url"></p>
+            </div>
+
+            <!-- Suspended message -->
+            <div class="suspended-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="6" y="4" width="4" height="16"></rect>
+                    <rect x="14" y="4" width="4" height="16"></rect>
+                </svg>
+                <span>Tab Suspended</span>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat">
+                    <span class="stat-value" id="memorySaved">~50 MB</span>
+                    <span class="stat-label">Memory Saved</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-value" id="timeSuspended">Just now</span>
+                    <span class="stat-label">Time Suspended</span>
+                </div>
+            </div>
+
+            <!-- Restore prompt -->
+            <div class="restore-prompt">
+                <div class="restore-animation">
+                    <div class="pulse-ring"></div>
+                    <div class="click-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </div>
+                </div>
+                <p class="restore-text">Click anywhere or press any key to restore</p>
+            </div>
+        </div>
+
+        <!-- Footer branding -->
+        <footer class="footer">
+            <a href="https://zovo.one" target="_blank" class="branding">
+                <span class="powered-by">Powered by</span>
+                <span class="zovo-logo">Zovo</span>
+            </a>
+        </footer>
+    </div>
+
+    <script src="suspended.js"></script>
+</body>
+
+</html>

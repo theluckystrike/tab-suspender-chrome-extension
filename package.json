@@ -1,0 +1,16 @@
+{
+  "name": "tab-suspender-chrome-extension",
+  "version": "1.0.0",
+  "description": "Open source Chrome extension that saves memory by suspending inactive tabs. The trusted Great Suspender alternative.",
+  "keywords": ["chrome-extension", "tab-suspender", "great-suspender-alternative", "productivity", "manifest-v3", "browser-extension", "tab-manager", "memory-saver"],
+  "author": "Zovo <hello@zovo.one> (https://zovo.one)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/theluckystrike/tab-suspender-chrome-extension"
+  },
+  "homepage": "https://chromewebstore.google.com/detail/tab-suspender-pro-save-me/ofgncemnlblfnocjbojdhamacfffcpnm",
+  "bugs": {
+    "url": "https://github.com/theluckystrike/tab-suspender-chrome-extension/issues"
+  }
+}
