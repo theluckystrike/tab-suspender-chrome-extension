@@ -1,0 +1,8 @@
+title: "Tab Suspender Pro — Free Open Source Chrome Extension"
+description: "Save memory and speed up Chrome by automatically suspending inactive tabs. A safe, open source Great Suspender alternative."
+theme: jekyll-theme-cayman
+url: "https://theluckystrike.github.io"
+baseurl: "/tab-suspender-chrome-extension"
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
