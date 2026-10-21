@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Tab Suspender: Save Memory & Speed Up Chrome | Zovo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The trusted tab suspender that saves memory and speeds up Chrome. No malware. No tracking. Just savings.",
   "action": {
     "default_title": "Tab Suspender",

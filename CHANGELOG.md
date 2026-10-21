@@ -4,6 +4,18 @@ All notable changes to Tab Suspender will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-10-21
+
+### Fixed
+
+- Allowlist entries now match their own domain and every subdomain on a label boundary. Adding `example.com` keeps `app.example.com` and `client.example.com` awake, as asked in #11.
+- Look-alike hosts no longer match. The old substring check let `example.com` match `notexample.com`.
+- Entries written as `*.example.com`, `www.example.com` or a pasted URL are normalized to the bare domain.
+
+### Added
+
+- `src/lib/domain-match.js` with unit tests in `test/`. Run them with `npm test`.
+
 ## [1.0.0] - 2024-12-01
 
 ### Added

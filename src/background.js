@@ -3,6 +3,8 @@
  * Simplified, bulletproof version
  */
 
+importScripts('lib/domain-match.js');
+
 console.log('Tab Suspender: Background starting...');
 
 // ============================================================================
@@ -431,17 +433,16 @@ async function restoreAllTabs() {
 // WHITELIST
 // ============================================================================
 
+// Matches the host and its subdomains on a label boundary (see lib/domain-match.js).
+// The old substring check let "example.com" match "notexample.com" and missed
+// nothing it should catch, so subdomains keep working and false matches stop.
 function isWhitelisted(url) {
-    try {
-        const urlObj = new URL(url);
-        return config.whitelistedDomains.some(d => urlObj.hostname.includes(d));
-    } catch {
-        return false;
-    }
+    return TabSuspenderDomainMatch.isUrlAllowlisted(url, config.whitelistedDomains);
 }
 
 async function addToWhitelist(domain) {
-    if (!config.whitelistedDomains.includes(domain)) {
+    domain = TabSuspenderDomainMatch.normalizeDomain(domain);
+    if (domain && !config.whitelistedDomains.includes(domain)) {
         config.whitelistedDomains.push(domain);
         await saveSettings();
     }
