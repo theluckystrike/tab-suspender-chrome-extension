@@ -62,7 +62,7 @@ async function loadStats() {
             .reduce((sum, h) => sum + h.memorySaved, 0);
 
         const allTabs = await chrome.tabs.query({});
-        const suspended = allTabs.filter(t => t.url && t.url.includes('suspended.html')).length;
+        const suspended = allTabs.filter(t => isSuspendedTab(t.url)).length;
 
         updateStatsDisplay({
             totalSaved: stats.totalSaved || 0,
@@ -114,7 +114,7 @@ async function loadTabs() {
                     active: tab.active,
                     pinned: tab.pinned,
                     audible: tab.audible,
-                    status: (tab.url && tab.url.includes('suspended.html')) ? 'suspended' : (tab.active ? 'active' : 'idle')
+                    status: isSuspendedTab(tab.url) ? 'suspended' : (tab.active ? 'active' : 'idle')
                 }))
             }));
         }
@@ -376,10 +376,14 @@ function formatBytes(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
 }
 
+function isSuspendedTab(url) {
+    return TabSuspenderSuspendedUrl.isSuspendedUrl(url, chrome.runtime.getURL(''));
+}
+
 function getDomain(url) {
     try {
         if (!url) return 'Unknown';
-        if (url.includes('suspended.html')) {
+        if (isSuspendedTab(url)) {
             const params = new URLSearchParams(url.split('?')[1]);
             const originalUrl = params.get('url');
             if (originalUrl) {

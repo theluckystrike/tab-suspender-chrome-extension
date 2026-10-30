@@ -61,7 +61,7 @@ function createBackground() {
     const context = vm.createContext({
         chrome,
         console: { log() {}, error() {} },
-        importScripts() {},
+        importScripts(...files) { for (const file of files) vm.runInContext(source(file), context, { filename: file }); },
         TabSuspenderDomainMatch: { isUrlAllowlisted: () => false },
         URL, URLSearchParams, Date, Map, Promise,
         setTimeout: () => 1,

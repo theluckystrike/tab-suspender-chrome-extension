@@ -47,7 +47,7 @@ function loadBackground(tabs) {
         clearTimeout() {},
         setInterval: () => 0
     });
-    context.importScripts = (file) => vm.runInContext(read(file), context);
+    context.importScripts = (...files) => files.forEach(file => vm.runInContext(read(file), context));
     vm.runInContext(read('background.js'), context);
 
     const handle = async (message) => JSON.parse(JSON.stringify(
