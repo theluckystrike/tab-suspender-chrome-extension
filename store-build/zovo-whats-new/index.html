@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>What's new</title>
+<link rel="stylesheet" href="style.css">
+<script src="config.js" defer></script>
+<script src="zovo-cards.js" defer></script>
+<script src="page.js" defer></script>
+</head>
+<body>
+<p class="preview-bar" id="preview-bar" hidden>Preview with sample data. State <a href="?state=free">free</a> <a href="?state=pro">Pro</a> <a href="?state=lapsed">lapsed</a> <a href="?state=fresh">no numbers</a></p>
+<main class="page" id="page">
+
+  <header class="masthead">
+    <img class="app-icon" id="app-icon" alt="" width="56" height="56" hidden>
+    <div class="masthead-text">
+      <h1 class="title"><span class="js-name">This extension</span></h1>
+      <p class="byline">by Zovo <span class="pill" id="version-pill">Version <span class="js-version">1.0.0</span></span></p>
+      <p class="why-open" id="why-open">This page opens by itself at most once in 30 days. You can turn it off at the <a class="inline-link" href="#optout-row">bottom</a>.</p>
+    </div>
+  </header>
+
+  <section class="block changes" id="changes" aria-labelledby="changes-title">
+    <h2 class="block-title" id="changes-title">What changed in <span class="js-version">1.0.0</span></h2>
+    <ul class="change-list" id="change-list"></ul>
+    <p class="changed-by">Changed<span class="js-date-part"> on <span class="js-date">31 October 2026</span></span> by Michael Lip, the developer. Support goes straight to me at <a class="inline-link" data-cta="support-changes" href="mailto:support@zovo.one">support@zovo.one</a>.</p>
+  </section>
+
+  <section class="note" aria-label="A note from the developer">
+    <img class="portrait" src="michael.jpg" alt="Michael Lip" width="64" height="64">
+    <div>
+      <p class="note-text">Thank you for using <span class="js-name">this extension</span>. It is built and fixed by one developer, and every rating and every message helps me keep it going.</p>
+      <p class="note-sig">Michael Lip</p>
+    </div>
+  </section>
+
+  <section class="block review" id="review" aria-labelledby="review-title">
+    <h2 class="block-title" id="review-title">An honest rating</h2>
+    <p class="review-ask">If it has earned five stars from you, please give them. If it hasn't, tell me what's missing.</p>
+    <div class="pair">
+      <a class="btn" id="rate-link" data-cta="rate" href="https://chromewebstore.google.com/" target="_blank" rel="noopener">Rate it on the Chrome Web Store</a>
+      <a class="btn" id="tell-link" data-cta="tell" href="mailto:support@zovo.one" target="_blank" rel="noopener">Tell me what's missing</a>
+    </div>
+    <p class="hint">The first button opens the store's review page in a new tab. The second opens a mail to me. I read every one.</p>
+  </section>
+
+  <section class="block value" id="value" aria-labelledby="value-title" hidden>
+    <h2 class="block-title" id="value-title">In this browser so far</h2>
+    <ul class="stats" id="stats"></ul>
+    <p class="hint" id="stats-note">Counted by <span class="js-name">this extension</span> in this browser. This page never sends them anywhere.</p>
+    <ol class="tips" id="tips" hidden></ol>
+  </section>
+
+  <div class="break" id="break" aria-hidden="true"><span class="break-line"></span></div>
+
+  <section class="share" id="share" aria-labelledby="share-title">
+    <p class="share-kicker">Zovo Share for Lifetime</p>
+    <h2 class="share-title" id="share-title">Share <span class="js-name">this extension</span> and get Zovo Lifetime free</h2>
+    <p class="share-text">Make 5 public posts about any Zovo extension on your own social accounts, at most 2 on one platform. Say what you really think. A critical post counts the same.</p>
+    <ol class="steps">
+      <li>Post on your own public account on X, LinkedIn, Facebook, Threads, Bluesky, Mastodon, Instagram, TikTok or YouTube, or on your own blog.</li>
+      <li>Add 'I get a free Zovo membership for sharing this' or #ad to each post.</li>
+      <li>Join Zovo Chat on Telegram and send me the 5 links, or mail them to <a class="inline-link" data-cta="share-mail" href="mailto:support@zovo.one">support@zovo.one</a>.</li>
+    </ol>
+    <p class="share-text">When all 5 posts pass my check, you get a Lifetime key. <span class="js-price-free" hidden>It costs $99 once on zovo.one. </span>The key turns on Pro in each Zovo extension that accepts Zovo keys.</p>
+    <p class="share-rule">Store reviews and ratings don't count and never earn a gift.</p>
+    <div class="share-actions">
+      <a class="btn btn-quiet" id="share-chat" data-cta="share-chat" href="https://t.me/" target="_blank" rel="noopener">Join Zovo Chat on Telegram</a>
+    </div>
+    <details class="terms">
+      <summary>Full terms</summary>
+      <ul>
+        <li>Each post has to be public, so anyone can open it without logging in.</li>
+        <li>Each post names a Zovo extension. It's dated 31 October 2026 or later.</li>
+        <li>Five separate posts, all from you. Two links to one post count as one, and a repost of an older post doesn't count.</li>
+        <li>Product Hunt, Hacker News, Reddit, forums, review sites and replies in other people's threads don't count.</li>
+        <li>One key per person. Keep your posts up for 14 days after you get your key. If you delete one or make it private, the key stops working.</li>
+        <li>I check every link myself before a key goes out, usually within 24 hours on weekdays.</li>
+        <li>This program is run by Zovo. Google and the Chrome Web Store have no part in it.</li>
+      </ul>
+    </details>
+  </section>
+
+  <section class="block faq" id="faq" aria-labelledby="faq-title">
+    <h2 class="block-title" id="faq-title">Questions</h2>
+    <details>
+      <summary>Does this page send my data anywhere?</summary>
+      <p>No. This page makes no network requests. The numbers on it come from this browser's own storage. A link opens a site only when you click it.</p>
+    </details>
+    <details id="faq-stop">
+      <summary>How do I stop this page from opening?</summary>
+      <p>Tick the box at the bottom of this page. Even without it, the page opens by itself at most once in 30 days, and only after an update. It never opens when you install the extension.</p>
+    </details>
+    <details>
+      <summary>What does Zovo Lifetime include?</summary>
+      <p>A Lifetime key turns on Pro in each Zovo extension that accepts Zovo keys, with no renewals. <span class="js-price-free" hidden>On zovo.one it costs $99 once, or Pro is $4.99 a month. </span>The list of extensions is on <a class="inline-link" data-cta="faq-pricing" href="https://zovo.one/pricing" target="_blank" rel="noopener">zovo.one/pricing</a>.</p>
+    </details>
+  </section>
+
+  <footer class="footer">
+    <label class="optout" id="optout-row" hidden><input type="checkbox" id="optout"> Don't open this page after future updates</label>
+    <p class="optout-saved" id="optout-saved" role="status" hidden>Saved. This page won't open by itself again.</p>
+    <button type="button" class="btn btn-quiet" id="close-button">Close this page</button>
+  </footer>
+</main>
+<p class="closed" id="closed-note" hidden>You can close this tab now.</p>
+</body>
+</html>

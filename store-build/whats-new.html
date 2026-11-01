@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en" class="tsp-base">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's new in Tab Suspender Pro</title>
+<link rel="icon" href="icons/icon32.png">
+<style>
+  html[data-theme="dark"] { background: #171411; }
+  html:not([data-theme="dark"]) { background: #F6F0E4; }
+</style>
+<script src="theme-init.js"></script>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="design/tokens.css">
+<link rel="stylesheet" href="design/components.css">
+<link rel="stylesheet" href="whats-new.css">
+<script src="membership-state.js"></script>
+<script src="whats-new.js" defer></script>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><defs>
+    <symbol id="restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5 4h14"/> <path d="M4.5 8H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 19.5v-10A1.5 1.5 0 0 1 4.5 8z"/> <path d="M11.5 17.5v-6M9 14l2.5-2.5L14 14"/> </symbol>
+    <symbol id="tab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> </symbol>
+    <symbol id="window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M3 8.5h18M6.5 6.25v.1M9 6.25v.1"/> </symbol>
+    <symbol id="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5.5 20V5.5A1.5 1.5 0 0 1 7 4h1.5L11 6.5V20zM13.5 20V5.5A1.5 1.5 0 0 1 15 4h1.5L19 6.5V20z"/> </symbol>
+    <symbol id="protect" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10v8.5A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V10"/> <path d="M6.5 13V5.5A1.5 1.5 0 0 1 8 4h7l2.5 2.5V13"/> </symbol>
+    <symbol id="drawer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 10H18l2.5 2.5V19h-17z"/> <path d="M10 14.5h4M6 10V6.5A1.5 1.5 0 0 1 7.5 5h8L18 7.5V10"/> </symbol>
+    <symbol id="timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 20a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/> <path d="M12 6V3.5M9.5 3.5h5M12 13V9.5M12 13l2.5 1.5"/> </symbol>
+    <symbol id="keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 7H18l2.5 2.5V17h-17z"/> <path d="M7 10.5v.1M10.5 10.5v.1M14 10.5v.1M17 10.5v.1M8 14h8"/> </symbol>
+    <symbol id="suspend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 3H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 14.5v-10A1.5 1.5 0 0 1 4.5 3z"/> <path d="M11.5 6.5v6M9 10l2.5 2.5L14 10"/> <path d="M5 20h14"/> </symbol>
+    <symbol id="pro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M6 3.5h9.5L18 6v14.5l-6-4-6 4z"/> </symbol>
+    <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5 12.5 9.5 17 19 7.5"/> </symbol>
+    <symbol id="ico-stats" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 20.5h17"/> <path d="M5 20v-7h2.5L9 14.5V20M10.5 20V8H13l1.5 1.5V20M16 20v-9h2.5l1.5 1.5V20"/> </symbol>
+    <symbol id="pattern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M12 8v8M8.5 10l7 4M15.5 10l-7 4"/> </symbol>
+    <symbol id="whitelist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M8 13.5l2.5 2.5 5.5-5.5"/> </symbol>
+    <symbol id="shield-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 7H18l2.5 2.5V17h-17z"/> <path d="M7.5 10.5v3M11 12h6"/> </symbol>
+    <symbol id="settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M7 10h1.25M11.75 10H17M7 14.5h5M16.25 14.5H17"/> <path d="M10 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM14 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/> </symbol>
+    <symbol id="warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M12 8.5V13M12 16v.1"/> </symbol>
+    <symbol id="info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M12 11.5V16M12 8.5v.1"/> </symbol>
+    <symbol id="lifetime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M17.66 6.34A8 8 0 1 0 19.52 9.26"/> <path d="M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/> </symbol>
+    <symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 20C7 16 3.5 13 3.5 8.5 3.5 6 5.5 4 8 4c1.8 0 3.2 1 4 2.5C12.8 5 14.2 4 16 4c2.5 0 4.5 2 4.5 4.5 0 4.5-3.5 7.5-8.5 11.5z"/> </symbol>
+    <symbol id="memory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 8H18l2.5 2.5V16h-17z"/> <path d="M6.5 10.75v2.5M9.5 10.75v2.5M12.5 10.75v2.5"/> </symbol>
+    <symbol id="tab-sleeping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M7 14h2.5M12 14h2.5"/> </symbol>
+    </defs></svg>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="preview-bar" id="previewBar" role="region" aria-label="Preview controls" hidden>
+  <span>Preview with sample numbers. In the extension every number comes from the user's own browser.</span>
+  <span>
+    <a data-preview="free" href="?state=free">Free user</a> ·
+    <a data-preview="pro" href="?state=pro">Pro member</a> ·
+    <a data-preview="fresh" href="?state=fresh">No stats yet</a> ·
+    <a data-preview="lapsed" href="?state=lapsed">Pro switched off</a>
+  </span>
+</div>
+
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="https://zovo.one/?utm_source=tab-suspender-pro&amp;utm_medium=extension&amp;utm_campaign=whats-new-1-0-37&amp;utm_content=logo" target="_blank" rel="noopener">
+      <svg width="28" height="28" viewBox="0 0 128 128" aria-hidden="true"><path d="M28 0H92l36 36v64a28 28 0 0 1-28 28H28A28 28 0 0 1 0 100V28A28 28 0 0 1 28 0z" fill="#1F5C47"/><path d="M24 98a6 6 0 0 0 6 6h68a6 6 0 0 0 6-6V56L92 42H58l-6-12H30a6 6 0 0 0-6 6z" fill="#E6D7B8"/><path d="M40 74h30" stroke="#1F5C47" stroke-width="10" stroke-linecap="round"/></svg>
+      <span class="brand-name">Tab Suspender Pro <span class="brand-by">by Zovo</span></span>
+    </a>
+    <span class="c-badge version-pill" data-version="v">v1.0.37</span>
+  </header>
+
+  <main id="main">
+    <!-- Masthead: the one place on this page that sits on the pattern -->
+    <section class="hero tsp-pattern" aria-labelledby="heroTitle">
+      <span class="eyebrow">Update filed <span data-version="release">1.0.37</span></span>
+      <h1 id="heroTitle" class="tsp-display">
+        <span class="nowrap">Tab Suspender Pro</span> is up to date.
+        <span class="line2" id="heroLine2Count" hidden>It has filed your tabs <em id="heroCount">0</em> <span id="heroCountNoun">times</span>.</span>
+        <span class="line2" id="heroLine2Plain">Here's what changed in this release.</span>
+      </h1>
+
+      <div class="stats" id="stats" hidden>
+        <h2 class="sr-only">Your numbers</h2>
+        <div class="c-stat c-stat-accent" id="cardTotal" hidden>
+          <span class="value" id="statTotal">0</span>
+          <span class="label" id="statTotalLabel">Times a tab went to sleep</span>
+          <span class="delta" id="statTotalNote"></span>
+        </div>
+        <div class="c-stat" id="cardNow" hidden title="An estimate. Tab Suspender Pro counts about 50 MB for each sleeping tab. Heavy sites free more and simple pages free less.">
+          <span class="value" id="statNow">0 MB</span>
+          <span class="label">Estimated memory freed now</span>
+          <span class="delta" id="statNowNote"></span>
+        </div>
+        <div class="c-stat" id="cardAwake" hidden>
+          <span class="value" id="statAwake">0</span>
+          <span class="label" id="statAwakeLabel">Sites kept awake</span>
+          <span class="delta" id="statAwakeNote"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Release notes as index cards -->
+    <details class="changes" id="changes" open>
+      <summary>
+        <span class="c-section c-section-lg"><h2>What's new in <span data-version="release">1.0.37</span></h2><span class="rule"></span></span>
+        <svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg>
+      </summary>
+      <div class="changes-body">
+        <p class="changes-lead">Nothing on this list needs a setting. Your whitelist, timer and profile carry over exactly as you left them.</p>
+
+        <p class="changes-group"><span class="c-badge c-badge-accent">New</span></p>
+        <div class="cards">
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#restore"/></svg></span>
+            <h3>A tab wakes up where you left it</h3>
+            <p>Scroll position is saved when a tab goes to sleep and put back when it comes back, so a long article opens at the paragraph you stopped on.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#tab"/></svg></span>
+            <h3>Back never lands on the sleeping page</h3>
+            <p>Waking a tab no longer adds a history entry. The Back button goes to the page before, the way it did before the tab slept.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#window"/></svg></span>
+            <h3>Native mode</h3>
+            <p>Turn it on in Settings and the extension uses Chrome's own discard instead of a placeholder page. The tab keeps its title and icon, uses no memory, and reloads when you click it.</p>
+            <button class="card-link" type="button" data-open="settings">Open Settings</button>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#pause"/></svg></span>
+            <h3>Pause for 1 hour, 8 hours or until tomorrow</h3>
+            <p>Pick one from the popup when you need every tab live, for a demo or a long research session. Suspending starts again on its own.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#protect"/></svg></span>
+            <h3>Protect one tab for this session</h3>
+            <p>One click in the popup keeps a single tab awake until you close it, with no whitelist rule left behind.</p>
+          </article>
+        </div>
+
+        <p class="changes-group"><span class="c-badge">Improved</span></p>
+        <div class="cards">
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#drawer"/></svg></span>
+            <h3>Only suspend when more than N tabs are open</h3>
+            <p>Light tab users never see a sleeping tab. The default is 0, which means always, and you set the number in Settings.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#timer"/></svg></span>
+            <h3>Timers keep working past 500 tabs</h3>
+            <p>They also survive Chrome restarting the extension in the background, which used to leave some tabs awake for good.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#keyboard"/></svg></span>
+            <h3>The sleeping page has a keyboard</h3>
+            <p>Enter wakes the tab, and a "Never suspend this site" link adds the domain to your whitelist without a trip to Settings.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#suspend"/></svg></span>
+            <h3>Alt+S works with the default settings</h3>
+            <p>The rule that keeps the tab you are reading awake used to block your own command. "Suspend this tab" and the shortcut now go through.</p>
+          </article>
+        </div>
+
+        <p class="changes-group"><span class="c-badge c-badge-success">Fixed</span></p>
+        <div class="cards">
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#check"/></svg></span>
+            <h3>Pasting a key works the first time</h3>
+            <p>The field no longer doubles the ZOVO- prefix or cuts it short, and you can clear it.</p>
+          </article>
+          <article class="card">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#ico-stats"/></svg></span>
+            <h3>Settings shows the real version and your real counts</h3>
+            <p>The invented "top 1% of users" rank and the countdown banner are gone.</p>
+          </article>
+        </div>
+
+        <p class="changes-group"><span class="c-badge c-badge-pro">For Pro members</span></p>
+        <div class="cards">
+          <article class="card card-pro">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#pattern"/></svg></span>
+            <h3>URL wildcard patterns</h3>
+            <p>Rules such as https://docs.google.com/* or *://*.atlassian.net/* keep whole paths awake, not just a domain. Free users keep the 5-domain whitelist.</p>
+          </article>
+          <article class="card card-pro">
+            <span class="card-icon"><svg class="icon icon-24"><use href="#pro"/></svg></span>
+            <h3>Pro stays on while you are offline</h3>
+            <p>Only a definite "invalid" answer from the server turns it off, after a 7-day grace period. A server outage or a closed laptop no longer does.</p>
+          </article>
+        </div>
+      </div>
+    </details>
+
+    <!-- Pro members -->
+    <section class="section" aria-labelledby="thanksTitle" data-for="protected" hidden>
+      <div class="note note-pro">
+        <span class="c-badge c-badge-pro">Pro is active</span>
+        <h2 id="thanksTitle" class="tsp-display">Thank you for backing Tab Suspender Pro</h2>
+        <p class="sub">There is nothing to buy here. Your timer can be any minute from 1 to 120, your whitelist has no cap, URL patterns are on, and Focus Mode is there whenever you sit down to work.</p>
+        <div class="row">
+          <button class="c-btn c-btn-primary" type="button" data-open="settings">Open Settings</button>
+          <a class="c-btn" href="mailto:support@zovo.one?subject=Tab%20Suspender%20Pro">Email support</a>
+        </div>
+        <p class="note-foot">Liked it? A <a data-cta="pro-review" href="https://chromewebstore.google.com/detail/ofgncemnlblfnocjbojdhamacfffcpnm/reviews" target="_blank" rel="noopener">store review</a> takes a minute and helps other people with too many tabs find it.</p>
+      </div>
+    </section>
+
+    <!-- Members whose Pro is switched off -->
+    <section class="section" aria-labelledby="lapsedTitle" data-for="lapsed" hidden>
+      <div class="note note-warn">
+        <span class="c-badge c-badge-warn">Your license needs a check</span>
+        <h2 id="lapsedTitle" class="tsp-display">Pro is switched off on this browser</h2>
+        <p class="sub">This browser has a Zovo license key saved, but Pro isn't on right now. Usually it's a lapsed payment or an old key, so paste your current key in Settings or renew if your plan has ended.</p>
+        <div class="row">
+          <button class="c-btn c-btn-primary" type="button" data-open="settings.html#license">Enter my key</button>
+          <a class="c-btn" data-cta="lapsed-renew" href="https://zovo.one/join" target="_blank" rel="noopener">Renew on zovo.one</a>
+        </div>
+        <p class="note-foot">Not sure what happened? <a href="mailto:support@zovo.one?subject=Tab%20Suspender%20Pro%20license">Email support</a> and I'll check your license.</p>
+      </div>
+    </section>
+
+    <!-- Plans: free users only -->
+    <section class="section" aria-labelledby="pivotTitle" data-for="free" hidden>
+      <div class="c-section c-section-lg"><h2 id="pivotTitle">Free runs on our presets. Pro runs on your rules.</h2><span class="rule"></span></div>
+      <p class="sub">Pick the exact minute tabs fall asleep, keep every site you need awake, and keep whole URL paths awake with patterns.</p>
+      <div class="plans" id="plans">
+        <p class="paid-note" id="paidNote" hidden>Bought Pro after clicking through earlier? Your key is in your purchase email, so <button class="linkish" type="button" data-open="settings.html#license">paste it in Settings</button> and Pro turns on right away.</p>
+        <div class="plan-grid">
+          <div class="plan">
+            <span class="plan-tab">Monthly</span>
+            <div class="price"><span class="amt tsp-display">$4.99</span><span class="per">a month</span></div>
+            <p class="plan-sub">Renews monthly. Cancel any time from your dashboard, with no fee.</p>
+            <a class="c-btn c-btn-primary c-btn-block" data-cta="plan-monthly" href="https://zovo.one/join?tier=pro" target="_blank" rel="noopener">Get Pro monthly</a>
+          </div>
+          <div class="plan plan-lifetime">
+            <span class="plan-tab">Lifetime</span>
+            <div class="price"><span class="amt tsp-display">One payment</span><span class="per">no renewals</span></div>
+            <p class="plan-sub">Pay once and Pro is yours to keep. The current price is on the pricing page.</p>
+            <a class="c-btn c-btn-block" data-cta="plan-lifetime" href="https://zovo.one/pricing" target="_blank" rel="noopener">See Lifetime pricing</a>
+          </div>
+        </div>
+        <p class="both">Both plans include Pro in 14 other Zovo extensions, 15 in all.</p>
+        <ul class="assure">
+          <li><svg class="icon"><use href="#check"/></svg>Secure checkout by Stripe</li>
+          <li><svg class="icon"><use href="#check"/></svg>Your key arrives as soon as payment clears</li>
+          <li><svg class="icon"><use href="#check"/></svg>Monthly cancels any time</li>
+          <li><svg class="icon"><use href="#info"/></svg><a data-cta="refund-terms" href="https://zovo.one/refund" target="_blank" rel="noopener">Refund terms</a></li>
+        </ul>
+        <p class="have-key">Already paid? <button class="linkish" type="button" data-open="settings.html#license">Enter your license key</button></p>
+        <p class="seller">Sold by Zovo through zovo.one, not by Google.</p>
+      </div>
+    </section>
+
+    <!-- Compare: free users only -->
+    <section class="section" aria-labelledby="compareTitle" data-for="free" hidden>
+      <div class="c-section c-section-lg"><h2 id="compareTitle">Here is exactly what you get</h2><span class="rule"></span></div>
+      <p class="sub">Pro changes four things. Automatic sleep, the protected-tab rules, keyboard shortcuts, the right-click menu and your memory stats are all part of the free version.</p>
+      <div class="compare">
+        <table>
+          <caption class="sr-only">Limits in the free version and in Pro</caption>
+          <thead>
+            <tr><th scope="col">Limit</th><th scope="col">Free</th><th scope="col" class="pro-col">Pro</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Sites kept awake<small>Whitelisted sites never go to sleep.</small></th>
+              <td data-label="Free">5</td>
+              <td class="pro" data-label="Pro">No limit</td>
+            </tr>
+            <tr>
+              <th scope="row">Sleep timer<small>How long a tab sits idle before it sleeps.</small></th>
+              <td data-label="Free">15, 30 or 60 minutes</td>
+              <td class="pro" data-label="Pro">Any minute from 1 to 120</td>
+            </tr>
+            <tr>
+              <th scope="row">URL patterns<small>Keep a whole path awake, such as docs.google.com/*.</small></th>
+              <td data-label="Free">Domains only</td>
+              <td class="pro" data-label="Pro">Wildcard patterns</td>
+            </tr>
+            <tr>
+              <th scope="row">Focus Mode sessions<small>One click puts every other tab to sleep. Leaving Focus Mode wakes exactly those tabs again.</small></th>
+              <td data-label="Free">3</td>
+              <td class="pro" data-label="Pro">No limit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="compare-foot">If you stop paying, the free version keeps working with your tabs and settings in place.</p>
+    </section>
+
+    <!-- Tips: value for everyone -->
+    <section class="section" aria-labelledby="tipsTitle">
+      <div class="c-section c-section-lg"><h2 id="tipsTitle">Four things most people never set up</h2><span class="rule"></span></div>
+      <p class="sub">Each takes under a minute and works without Pro.</p>
+      <div class="cards tips">
+        <article class="card">
+          <span class="card-icon"><svg class="icon icon-24"><use href="#keyboard"/></svg></span>
+          <h3>Put tabs to sleep from the keyboard</h3>
+          <p>Skip the popup. These are your shortcuts right now.</p>
+          <dl class="keys">
+            <div><dt><kbd class="c-kbd" data-cmd="suspend_current">Alt+S</kbd></dt><dd>this tab</dd></div>
+            <div><dt><kbd class="c-kbd" data-cmd="suspend_others">Alt+Shift+S</kbd></dt><dd>every other tab</dd></div>
+            <div><dt><kbd class="c-kbd" data-cmd="restore_all">Alt+R</kbd></dt><dd>wake them all</dd></div>
+            <div><dt><kbd class="c-kbd" data-cmd="whitelist_site">Alt+W</kbd></dt><dd>keep this site awake</dd></div>
+          </dl>
+          <button class="card-link" type="button" data-open="shortcuts">Change shortcuts</button>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg class="icon icon-24"><use href="#shield-form"/></svg></span>
+          <h3>Audio and typed-in forms stay awake</h3>
+          <p>Tabs playing audio and tabs where you've typed into a regular form field don't fall asleep on the timer, and neither do pinned tabs or the tab you're on. Editors like Gmail or Notion aren't detected, so save a draft before you step away.</p>
+          <button class="card-link" type="button" data-open="settings">Review protections</button>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg class="icon icon-24"><use href="#whitelist"/></svg></span>
+          <h3>Keep the sites you need awake</h3>
+          <p>Add mail, chat or a live dashboard to your whitelist once, and its tabs stay loaded for good.</p>
+          <p class="hint" id="whitelistHint" hidden></p>
+          <button class="card-link" type="button" data-open="settings">Add a site</button>
+        </article>
+        <article class="card">
+          <span class="card-icon"><svg class="icon icon-24"><use href="#timer"/></svg></span>
+          <h3>Pick how fast tabs fall asleep</h3>
+          <p>Balanced, the default, waits 30 minutes. Aggressive cuts it to 15 and frees memory sooner on a busy laptop. Relaxed waits an hour.</p>
+          <button class="card-link" type="button" data-open="settings">Choose a profile</button>
+        </article>
+      </div>
+      <div class="callout">
+        <svg class="icon icon-24"><use href="#warning"/></svg>
+        <div>
+          <h3>Wake your tabs before you turn the extension off</h3>
+          <p>Sleeping tabs need Tab Suspender Pro to load again. If you plan to disable or remove it, press <kbd class="c-kbd" data-cmd="restore_all">Alt+R</kbd> first so every tab is awake and nothing closes with it.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Founder: everyone -->
+    <section class="section" aria-labelledby="founderTitle">
+      <div class="founder">
+        <img src="assets/founder-192.webp" alt="Michael Lip" width="96" height="96">
+        <div>
+          <h2 id="founderTitle" class="tsp-display">Support goes straight to the developer</h2>
+          <p>I'm Michael. I build Tab Suspender Pro on my own. If a tab won't wake up or a key won't activate, write to <a href="mailto:support@zovo.one?subject=Tab%20Suspender%20Pro">support@zovo.one</a>. It lands in my inbox, not a ticket queue, and I answer it myself.</p>
+          <p class="sig"><span class="sig-name">Michael Lip</span>, developer of Tab Suspender Pro</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section narrow" aria-labelledby="faqTitle">
+      <div class="c-section c-section-lg"><h2 id="faqTitle">Questions people ask</h2><span class="rule"></span></div>
+      <div class="faq">
+        <details>
+          <summary>Why did a tab not fall asleep?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>The timer starts over every time you click, type or scroll in a tab, so a tab only sleeps after it has sat untouched for the full time you chose. Tabs that are playing audio, pinned, on your whitelist or holding text you typed into a form stay awake on purpose, and so does the tab you are looking at. If you set a minimum tab count, nothing sleeps until you have more tabs than that open.</p>
+            <p>Browser pages such as chrome:// addresses, other extensions and local files never sleep either. If a normal tab still will not go, open Settings and check the protections, or email support@zovo.one with the site.</p></div>
+        </details>
+        <details>
+          <summary>What happens to a tab when it goes to sleep?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>A sleeping tab keeps its title and address. Clicking it loads the page again from the web and scrolls back to where you were. Anything unsaved on the page starts fresh. The timer skips tabs where you have typed into a regular form field, but editors like Gmail, Slack or Notion are not detected, so send or save a draft before you step away.</p>
+            <p>One catch. Sleeping tabs need the extension to wake up, so press <kbd class="c-kbd" data-cmd="restore_all">Alt+R</kbd> before you disable or remove it.</p></div>
+        </details>
+        <details>
+          <summary>What does Native mode change?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>Chrome discards the tab itself instead of showing the sleeping page. The tab keeps its title and icon in the tab strip and uses no memory until you click it, at which point Chrome reloads it. You lose the sleeping page and its "Never suspend this site" link, and scroll position comes back only when the site restores it on its own.</p></div>
+        </details>
+        <details>
+          <summary>Does Tab Suspender Pro send my browsing anywhere?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>No. Suspending, waking and the numbers on this page all happen inside your browser. The one exception is Pro. About once a day it confirms your license key with Zovo's server, sending only the key and the extension's name.</p></div>
+        </details>
+        <details data-for="free" hidden>
+          <summary>What happens if I stop paying for Pro?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>Pro keeps working until the end of the month you paid for. After that you're on the free version again, with your tabs and settings where you left them, and the Pro-only options lock until you come back.</p></div>
+        </details>
+        <details data-for="free" hidden>
+          <summary>Can I get a refund?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>Monthly plans can be cancelled at any time. Refunds for Monthly and Lifetime follow the refund policy.</p>
+            <p><a data-cta="faq-refund" href="https://zovo.one/refund" target="_blank" rel="noopener">Read the full refund terms</a></p></div>
+        </details>
+        <details>
+          <summary>I already paid. How do I turn Pro on?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>Open Settings, choose Activate, and paste the key that starts with ZOVO-. You'll find it in your purchase email and on your <a data-cta="faq-dashboard" href="https://zovo.one/dashboard" target="_blank" rel="noopener">zovo.one dashboard</a>. Can't find it? Email support@zovo.one.</p>
+            <p><button class="linkish" type="button" data-open="settings.html#license">Enter your key now</button></p></div>
+        </details>
+        <details>
+          <summary>Can I stop this page from opening after updates?<svg class="icon chev" aria-hidden="true"><use href="#tab-sleeping"/></svg></summary>
+          <div><p>Yes. Tick the box at the bottom of this page, or switch off "Show what's new after an update" in Settings. Updates still install, just without this tab.</p></div>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <label class="c-toggle optout"><input type="checkbox" id="optout"><span class="track"></span><span>Don't open this page after future updates</span></label>
+    <nav aria-label="Footer">
+      <a href="https://chromewebstore.google.com/detail/ofgncemnlblfnocjbojdhamacfffcpnm/reviews" target="_blank" rel="noopener">Write a review</a>
+      <a href="https://zovo.one/privacy" target="_blank" rel="noopener">Privacy</a>
+      <a href="https://zovo.one/terms" target="_blank" rel="noopener">Terms</a>
+      <a href="mailto:support@zovo.one?subject=Tab%20Suspender%20Pro">Support</a>
+    </nav>
+  </footer>
+</div>
+
+<div class="c-toast toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

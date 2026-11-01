@@ -1,0 +1,65 @@
+/* Zovo cards, kit v2.1 (sprint 1030). Loaded inside a shadow root, so these rules never touch the popup or Settings page.
+ * The colors live in --zc-* variables on .zc, an element inside the shadow root. Popup CSS can match the
+ * shadow host (and beats :host rules), but it cannot match .zc, and a value set on .zc wins over an inherited one.
+ * The theme is the data-zc-theme attribute on .zc. zovo-cards.js sets it from the real background behind the card. */
+:host { all: initial; display: block; }
+*, *::before, *::after { box-sizing: border-box; }
+p { margin: 0; }
+
+.zc {
+  --zc-bg: #ffffff;
+  --zc-quiet: #f6f3ee;
+  --zc-ink: #1d1b18;
+  --zc-muted: #59534b;
+  --zc-line: #e2dbcf;
+  --zc-btn-line: #1d1b18;
+  --zc-btn-hover: #f1ece4;
+  --zc-link: #1b5c8f;
+  margin: 8px 12px 12px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 13px; font-weight: 400; font-style: normal; line-height: 1.45; letter-spacing: normal;
+  text-align: left; text-transform: none; color: var(--zc-ink);
+}
+.zc[data-zc-theme="dark"] {
+  --zc-bg: #1d1c1a;
+  --zc-quiet: #191817;
+  --zc-ink: #f2eee8;
+  --zc-muted: #b5aea4;
+  --zc-line: #3a3733;
+  --zc-btn-line: #d9d3ca;
+  --zc-btn-hover: #2a2825;
+  --zc-link: #8cc4f2;
+}
+a:focus-visible, button:focus-visible { outline: 2px solid var(--zc-link); outline-offset: 2px; }
+
+/* Rating card */
+.zc-rate { padding: 12px; background: var(--zc-bg); border: 1px solid var(--zc-line); border-radius: 12px; }
+.zc-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.zc-from { color: var(--zc-muted); font-size: 12px; }
+.zc-later {
+  flex: none; padding: 2px 6px; border: 0; border-radius: 6px; background: transparent;
+  color: var(--zc-muted); font: inherit; font-size: 12px; cursor: pointer; text-decoration: underline;
+}
+.zc-later:hover { color: var(--zc-ink); }
+.zc-signal { margin-bottom: 4px; font-weight: 600; }
+.zc-ask { margin-bottom: 10px; }
+.zc-note { margin-top: 8px; color: var(--zc-muted); font-size: 12px; }
+.zc-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.zc-btn {
+  display: flex; align-items: center; justify-content: center; min-height: 36px; padding: 6px 8px;
+  border: 1.5px solid var(--zc-btn-line); border-radius: 8px; background: var(--zc-bg); color: var(--zc-ink);
+  font-size: 12.5px; font-weight: 600; line-height: 1.25; text-align: center; text-decoration: none;
+}
+.zc-btn:hover { background: var(--zc-btn-hover); }
+
+/* Popup "What's new" link. It sits on the popup background, so the row gets the card background too. */
+.zc-wn-row { margin-top: 0; padding: 4px 8px; background: var(--zc-bg); border-radius: 8px; text-align: center; }
+.zc-wn { color: var(--zc-link); font-size: 12px; }
+
+/* Settings share entry */
+.zc-share { max-width: 560px; padding: 16px; background: var(--zc-quiet); border: 1px dashed var(--zc-line); border-radius: 12px; font-size: 14px; }
+.zc-kicker { color: var(--zc-muted); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
+.zc-title { margin: 2px 0 8px; font-size: 16px; font-weight: 600; }
+.zc-text { margin-bottom: 8px; }
+.zc-muted { color: var(--zc-muted); }
+.zc-btn-quiet { display: inline-flex; border-color: var(--zc-line); font-weight: 500; font-size: 13px; padding: 6px 14px; }

@@ -1,0 +1,208 @@
+/* Tab Suspender Pro: the sleeping-tab page. "Card Catalogue".
+   One index card on the paper, its tab still showing. Light CSS on purpose:
+   tokens.css gives the palette, this file only draws the card. */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-14);
+  line-height: var(--lh-ui);
+  -webkit-font-smoothing: antialiased;
+  cursor: pointer; /* a click anywhere pulls the card */
+  transition: opacity var(--dur-base) var(--ease-out);
+}
+html[data-theme-transitioning] body,
+html[data-theme-transitioning] .card { transition: background var(--dur-slow) var(--ease-in-out), color var(--dur-slow) var(--ease-in-out); }
+
+.suspended-container {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding: var(--sp-5) var(--sp-4);
+  position: relative;
+  isolation: isolate;
+}
+/* The pattern sits behind the centre block only and fades to plain paper.
+   It is drawn on a pseudo-element at half strength so the card reads first. */
+.suspended-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: var(--pattern-fade), var(--pattern);
+  background-size: 100% 100%, var(--pattern-size);
+  background-repeat: no-repeat, repeat;
+  background-position: 0 0, center 8px;
+}
+
+/* Drawer label */
+.drawer-label {
+  display: flex; align-items: center; gap: var(--sp-3);
+  width: 100%; max-width: 600px; margin: 0 auto;
+  font-size: var(--fs-12); color: var(--ink-2);
+}
+.drawer-mark { display: inline-flex; }
+.drawer-mark svg { display: block; }
+.drawer-title { font-weight: var(--fw-semibold); color: var(--ink); letter-spacing: 0.01em; }
+.drawer-state {
+  margin-left: auto; display: inline-flex; align-items: center; gap: 6px;
+  height: 22px; padding: 0 var(--sp-2);
+  background: var(--surface-2); color: var(--ink-2);
+  font-size: var(--fs-11); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-caps); text-transform: uppercase;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+}
+
+/* The card */
+.content {
+  position: relative;
+  width: 100%; max-width: 600px; margin: var(--sp-10) auto var(--sp-8);
+  align-self: center;
+}
+.card {
+  position: relative; z-index: 2;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+  box-shadow: var(--shadow-3);
+  padding: var(--sp-8) var(--sp-8) var(--sp-6);
+  cursor: default;
+}
+/* The clipped corner: paper over the corner, with the card edge drawn across it */
+.card::after {
+  content: ""; position: absolute; top: -1px; right: -1px; width: 28px; height: 28px;
+  background: linear-gradient(to bottom left, var(--bg) 0 50%, var(--line) 50%, var(--line) calc(50% + 1.4px), var(--surface) calc(50% + 1.4px));
+}
+.card-tab {
+  position: absolute; left: -1px; top: -27px;
+  height: 28px; padding: 0 var(--sp-4) 0 var(--sp-3);
+  display: inline-flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--line); border-bottom: 0;
+  border-radius: var(--r-md) var(--r-md) 0 0;
+  font-size: var(--fs-11); font-weight: var(--fw-semibold); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--accent);
+}
+.card-tab::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--surface); }
+/* Two cards behind this one: the rest of the drawer */
+.card-shadow {
+  position: absolute; left: 0; right: 0; z-index: 1; height: 40px;
+  background: var(--surface-2); border: 1px solid var(--line);
+  border-radius: 0 0 var(--r-lg) var(--r-lg);
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+.card-shadow-1 { bottom: -7px; left: 7px; right: 7px; opacity: 0.9; }
+.card-shadow-2 { bottom: -14px; left: 16px; right: 16px; opacity: 0.6; }
+
+/* Title block */
+.tab-info { display: flex; align-items: flex-start; gap: var(--sp-4); padding-bottom: var(--sp-4); border-bottom: 2px solid var(--line-strong); }
+.favicon-frame {
+  flex: 0 0 auto; width: 48px; height: 48px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--surface-2);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  border-radius: var(--r-sm) 0 var(--r-sm) var(--r-sm);
+}
+.favicon { width: 24px; height: 24px; display: none; object-fit: contain; }
+.tab-text { min-width: 0; flex: 1; }
+.tab-title {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 500;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+  font-size: var(--fs-28); line-height: var(--lh-tight); letter-spacing: -0.01em;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.tab-url { margin: 6px 0 0; font-size: var(--fs-13); color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* Two facts on the card */
+.stats {
+  display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4);
+  margin: 0; padding: var(--sp-4) 0 var(--sp-5);
+  border-bottom: 1px solid var(--line);
+}
+.stat { display: grid; gap: 4px; }
+.stat-label {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-11); font-weight: var(--fw-medium); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--ink-2);
+}
+.stat-value {
+  margin: 0;
+  font-family: var(--font-display); font-weight: 500; font-variation-settings: "opsz" 72;
+  font-size: var(--fs-32); line-height: 1.05; letter-spacing: -0.01em; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.stat:last-child .stat-value { color: var(--accent); }
+
+/* Action */
+.restore-prompt { display: grid; gap: var(--sp-3); padding: var(--sp-5) 0 var(--sp-3); }
+.restore-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
+  width: 100%; min-height: 48px; padding: 0 var(--sp-5);
+  font: var(--fw-semibold) var(--fs-16)/1 var(--font-ui); color: var(--accent-ink);
+  background: var(--accent); border: 0; cursor: pointer;
+  clip-path: var(--clip-card); border-radius: var(--r-sm) 0 var(--r-sm) var(--r-sm);
+  transition: background var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.restore-btn:hover { background: var(--accent-strong); }
+.restore-btn:active { transform: translateY(1px); }
+.restore-btn:focus-visible { outline: none; box-shadow: inset 0 0 0 2px var(--accent), inset 0 0 0 4px var(--accent-ink); }
+.restore-text { margin: 0; font-size: var(--fs-13); color: var(--ink-2); text-align: center; }
+kbd {
+  display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; margin: 0 1px;
+  font: var(--fw-medium) var(--fs-11)/1 var(--font-mono); color: var(--ink);
+  background: var(--surface); border: 1px solid var(--line-strong); border-bottom-width: 2px; border-radius: var(--r-sm);
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%);
+  vertical-align: middle;
+}
+
+.never-suspend-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 0; font-size: var(--fs-13); font-weight: var(--fw-medium);
+  color: var(--accent); text-decoration: none;
+  cursor: pointer;
+}
+.never-suspend-link:hover .link-text { text-decoration: underline; }
+.never-suspend-link:focus-visible { outline: none; box-shadow: var(--focus-ring); border-radius: var(--r-xs); }
+
+/* Footer */
+.footer {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap;
+  width: 100%; max-width: 600px; margin: 0 auto;
+  font-size: var(--fs-12); color: var(--ink-2);
+}
+.footer-note { margin: 0; }
+.branding { color: var(--ink-2); text-decoration: none; font-weight: var(--fw-medium); }
+.branding:hover { color: var(--ink); text-decoration: underline; }
+
+/* Theme toggle: the lamp */
+.theme-toggle {
+  position: fixed; top: var(--sp-4); right: var(--sp-4);
+  width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;
+  color: var(--ink-2); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-sm);
+  cursor: pointer; transition: background var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+.theme-toggle:hover { background: var(--surface-3); color: var(--ink); }
+.theme-toggle:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+.theme-icon { display: none; }
+.icon { width: 16px; height: 16px; flex: 0 0 auto; display: inline-block; stroke: currentColor; fill: none; }
+.icon-20 { width: 20px; height: 20px; }
+
+/* Narrow windows */
+@media (max-width: 520px) {
+  .suspended-container { padding: var(--sp-4) var(--sp-4); }
+  .content { margin-top: var(--sp-8); }
+  .card { padding: var(--sp-6) var(--sp-5) var(--sp-5); }
+  .tab-title { font-size: var(--fs-24); }
+  .stats { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .stat-value { font-size: var(--fs-28); }
+  .theme-toggle { top: var(--sp-2); right: var(--sp-2); }
+  .drawer-label { padding-right: 44px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

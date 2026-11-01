@@ -1,0 +1,14 @@
+{
+  "extActionTitle": {
+    "description": "Tooltip for the browser action button",
+    "message": "Tab Suspender Pro"
+  },
+  "extDescription": {
+    "description": "Extension description shown in Chrome Web Store",
+    "message": "Automatski obustavi neaktivne kartice radi uštede memorije. Pametna zaštita za zvuk, videopozive i obrasce. Tipkovni prečaci."
+  },
+  "extName": {
+    "description": "Extension name shown in Chrome",
+    "message": "Tab Suspender Pro - Auto-Suspend Inactive Tabs"
+  }
+}

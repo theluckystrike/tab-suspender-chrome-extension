@@ -1,0 +1,222 @@
+/* Zovo what's new page, kit v2 (sprint 1030). No remote fonts, no remote images. */
+:root {
+  color-scheme: light dark;
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --quiet: #efebe4;
+  --ink: #1d1b18;
+  --muted: #59534b;
+  --line: #e2dbcf;
+  --btn-line: #1d1b18;
+  --btn-hover: #f1ece4;
+  --link: #1b5c8f;
+  --focus: #1b5c8f;
+  --tag-fixed: #8a3b12;
+  --tag-new: #1d6b3a;
+  --tag-improved: #1b5c8f;
+  --shadow: 0 1px 2px rgba(40, 30, 15, 0.04), 0 6px 20px rgba(40, 30, 15, 0.05);
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: "Iowan Old Style", "Charter", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141312;
+    --surface: #1d1c1a;
+    --quiet: #191817;
+    --ink: #f2eee8;
+    --muted: #b5aea4;
+    --line: #34312d;
+    --btn-line: #d9d3ca;
+    --btn-hover: #2a2825;
+    --link: #8cc4f2;
+    --focus: #8cc4f2;
+    --tag-fixed: #f2a77c;
+    --tag-new: #86d39f;
+    --tag-improved: #8cc4f2;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 6px 20px rgba(0, 0, 0, 0.22);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px; }
+
+.page {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 40px;
+}
+
+.preview-bar {
+  margin: 0;
+  padding: 8px 16px;
+  background: var(--quiet);
+  border-bottom: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+}
+.preview-bar a { margin-left: 8px; }
+
+/* 1. Header */
+.masthead { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; }
+.app-icon { flex: none; width: 56px; height: 56px; border-radius: 14px; object-fit: contain; }
+.masthead-text { min-width: 0; }
+.title {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(26px, 5.5vw, 36px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+.byline { margin: 6px 0 0; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.why-open { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+.pill {
+  display: inline-block;
+  padding: 1px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Shared block */
+.block {
+  margin: 0 0 24px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+.block-title {
+  margin: 0 0 14px;
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.hint { margin: 12px 0 0; color: var(--muted); font-size: 14px; }
+
+/* 2. What changed */
+.change-list { list-style: none; margin: 0; padding: 0; }
+.change-list li { display: flex; gap: 12px; align-items: baseline; padding: 8px 0; border-top: 1px solid var(--line); }
+.change-list li:first-child { border-top: 0; padding-top: 0; }
+.tag {
+  flex: none;
+  min-width: 76px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tag-fixed { color: var(--tag-fixed); }
+.tag-new { color: var(--tag-new); }
+.tag-improved { color: var(--tag-improved); }
+.changed-by { margin: 14px 0 0; color: var(--muted); font-size: 14px; }
+
+/* 3. Note */
+.note { display: flex; gap: 16px; align-items: flex-start; margin: 32px 0; padding: 0 8px; }
+.portrait { flex: none; width: 64px; height: 64px; border-radius: 50%; object-fit: cover; border: 1px solid var(--line); }
+.note-text { margin: 0; font-family: var(--serif); font-size: clamp(18px, 2.4vw, 20px); line-height: 1.5; }
+.note-sig { margin: 6px 0 0; color: var(--muted); font-size: 14px; }
+
+/* 4. Review card. Two buttons with the same size, style and weight. */
+.review-ask { margin: 0 0 18px; font-size: 17px; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1.5px solid var(--btn-line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--ink);
+  font: 600 15px/1.3 var(--sans);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn:hover { background: var(--btn-hover); }
+.btn-quiet { border-color: var(--line); font-weight: 500; }
+
+/* 5. Value */
+.stats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.stats li { padding: 14px 16px; border: 1px solid var(--line); border-radius: 12px; }
+.stat-n { display: block; font-family: var(--serif); font-size: 28px; font-weight: 600; line-height: 1.2; }
+.stat-l { display: block; color: var(--muted); font-size: 14px; }
+.tips { margin: 0; padding-left: 22px; }
+.tips li { margin: 0 0 10px; }
+.tips li:last-child { margin-bottom: 0; }
+
+/* Space between the review card and the share card. page.js sets its height. */
+.break { display: flex; align-items: center; justify-content: center; min-height: 32px; }
+.break-line { width: 64px; height: 1px; background: var(--line); }
+
+/* 6. Share card. Quieter than the review card. No shadow, no strong button. */
+.share {
+  margin: 0 0 24px;
+  padding: 24px;
+  background: var(--quiet);
+  border: 1px dashed var(--line);
+  border-radius: 16px;
+  font-size: 15px;
+}
+.share-kicker { margin: 0 0 4px; color: var(--muted); font-size: 13px; letter-spacing: 0.04em; text-transform: uppercase; }
+.share-title { margin: 0 0 12px; font-family: var(--serif); font-size: 20px; font-weight: 600; line-height: 1.3; }
+.share-text { margin: 0 0 12px; }
+.steps { margin: 0 0 12px; padding-left: 22px; }
+.steps li { margin: 0 0 6px; }
+.share-rule { margin: 0 0 16px; color: var(--muted); }
+.share-actions { margin: 0 0 12px; }
+.terms summary { cursor: pointer; color: var(--muted); font-size: 14px; }
+.terms ul { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
+.terms li { margin: 0 0 6px; }
+
+/* 7. FAQ */
+.faq details { border-top: 1px solid var(--line); padding: 10px 0; }
+.faq details:first-of-type { border-top: 0; padding-top: 0; }
+.faq summary { cursor: pointer; font-weight: 600; }
+.faq details p { margin: 8px 0 0; color: var(--muted); }
+
+/* 8. Footer */
+.footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 8px; padding: 8px 8px 0; }
+.optout { display: inline-flex; align-items: center; gap: 8px; color: var(--muted); font-size: 14px; cursor: pointer; }
+.optout input { width: 18px; height: 18px; margin: 0; accent-color: var(--link); }
+.optout-saved { flex-basis: 100%; order: 3; margin: 0; color: var(--muted); font-size: 13px; }
+.closed { margin: 30vh auto 0; max-width: 30em; padding: 0 16px; color: var(--muted); text-align: center; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 480px) {
+  .page { padding-top: 20px; }
+  .block, .share { padding: 18px 16px; border-radius: 14px; }
+  .pair { grid-template-columns: 1fr; }
+  .note { padding: 0; }
+  .change-list li { flex-direction: column; gap: 2px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page { animation: settle 360ms ease-out both; }
+  @keyframes settle { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+}

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" class="tsp-base">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Suspender Pro - Your impact</title>
+    <link rel="icon" href="icons/icon32.png">
+    <style>
+        html[data-theme="dark"] { background: #171411; }
+        html:not([data-theme="dark"]) { background: #F6F0E4; }
+    </style>
+    <script src="theme-init.js"></script>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="design/tokens.css">
+    <link rel="stylesheet" href="design/components.css">
+    <style>
+        /* Tab Suspender Pro: stats dashboard. "Card Catalogue".
+           stats-dashboard.js writes into the ids below and renders .chart-bar,
+           .site-item and .empty-state markup; the classes it toggles are
+           .syncing, .active (period) and .copied. */
+        *, *::before, *::after { box-sizing: border-box; }
+        html, body { margin: 0; }
+        body { font-size: var(--fs-14); line-height: var(--lh-body); }
+        a { color: var(--accent); }
+        [hidden] { display: none !important; }
+        .settings-container { max-width: 1040px; margin: 0 auto; padding: 0 var(--sp-6) var(--sp-12); }
+
+        /* Header */
+        .header { padding: var(--sp-6) 0 var(--sp-4); }
+        .header-content { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap; }
+        .logo { display: flex; align-items: center; gap: var(--sp-4); }
+        .logo-icon { width: 44px; height: 44px; display: block; }
+        .logo-text h1 { margin: 0; font-family: var(--font-display); font-weight: 500; font-variation-settings: "opsz" 72, "SOFT" 40; font-size: var(--fs-32); line-height: var(--lh-tight); letter-spacing: -0.01em; color: var(--ink); }
+        .tagline { display: block; margin-top: 2px; font-size: var(--fs-13); color: var(--ink-2); }
+        .header-actions { display: flex; gap: var(--sp-2); }
+
+        /* Sync bar */
+        .stats-sync-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; padding: var(--sp-2) var(--sp-3); margin-bottom: var(--sp-5); background: var(--surface-2); border-radius: var(--r-sm); font-size: var(--fs-12); color: var(--ink-2); clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%); }
+        .stats-sync-info { display: flex; align-items: center; gap: var(--sp-4); }
+        .stats-sync-indicator { display: inline-flex; align-items: center; gap: 6px; font-weight: var(--fw-semibold); color: var(--ink); }
+        .sync-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+        .stats-sync-indicator.syncing .sync-dot { background: var(--warn-fill); animation: blink 1s infinite; }
+        @keyframes blink { 50% { opacity: 0.3; } }
+        .stats-refresh-btn { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 0 var(--sp-3); font: var(--fw-medium) var(--fs-12)/1 var(--font-ui); color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-sm); cursor: pointer; }
+        .stats-refresh-btn:hover { background: var(--surface-3); }
+        .stats-refresh-btn:disabled { opacity: 0.6; cursor: default; }
+        .stats-refresh-btn.syncing .icon { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Stat tiles */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-3); }
+        .dashboard-card { box-shadow: var(--shadow-1); padding: var(--sp-4) var(--sp-5); }
+        .dashboard-card .card-value { font-family: var(--font-display); font-weight: 500; font-variation-settings: "opsz" 72; font-size: var(--fs-32); line-height: 1.05; letter-spacing: -0.01em; color: var(--ink); font-variant-numeric: tabular-nums; }
+        .dashboard-card .card-label { margin-top: 4px; font-size: var(--fs-11); font-weight: var(--fw-medium); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--ink-2); }
+        .dashboard-card.c-stat-accent { clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%); border-radius: var(--r-md) 0 var(--r-md) var(--r-md); }
+        .dashboard-card.c-stat-accent .card-value { font-size: var(--fs-40); }
+        .dashboard-card.c-stat-accent .card-value, .dashboard-card.c-stat-accent .card-label { color: var(--accent-ink); }
+
+        /* Section cards */
+        .panel { position: relative; margin-top: 7px; padding: var(--sp-5); background: var(--surface); border: 1px solid var(--line); border-radius: 0 0 var(--r-md) var(--r-md); box-shadow: var(--shadow-1); }
+        .panel::before { content: ""; position: absolute; left: -1px; top: -8px; width: 44px; height: 8px; background: var(--surface); border: 1px solid var(--line); border-bottom: 0; border-radius: var(--r-sm) var(--r-sm) 0 0; }
+        .panel::after { content: ""; position: absolute; top: -1px; right: -1px; width: 18px; height: 18px; background: linear-gradient(to bottom left, var(--bg) 0 50%, var(--line) 50%, var(--line) calc(50% + 1.4px), var(--surface) calc(50% + 1.4px)); }
+        .panel h2, .panel h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-20); letter-spacing: 0; color: var(--ink); }
+        .panel-sub { font-size: var(--fs-12); color: var(--ink-2); }
+
+        /* Chart: the drawer filling day by day */
+        .chart-container { margin-top: var(--sp-6); }
+        .chart-header { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-4); }
+        @media (max-width: 520px) { .chart-header { flex-direction: column; align-items: flex-start; } }
+        .chart-period { display: inline-flex; gap: 4px; padding: 4px; background: var(--surface-3); border-radius: var(--r-sm); }
+        .period-btn { height: 28px; padding: 0 var(--sp-3); font: var(--fw-medium) var(--fs-12)/1 var(--font-ui); color: var(--ink-2); background: transparent; border: 0; border-radius: var(--r-xs); cursor: pointer; }
+        .period-btn.active { color: var(--accent-ink); background: var(--accent); clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 5px, 100% 100%, 0 100%); }
+        .period-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+        .chart-canvas { display: flex; align-items: flex-end; gap: 6px; height: 260px; padding: 0 0 28px; border-bottom: 1px solid var(--line); }
+        .chart-bar { position: relative; flex: 1 1 0; min-width: 0; background: var(--accent); border-radius: var(--r-xs) 0 0 0; transition: background var(--dur-fast) var(--ease-out); }
+        .chart-bar:hover { background: var(--accent-strong); }
+        .chart-bar-label { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); margin-top: 8px; font-size: var(--fs-11); color: var(--ink-2); white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .chart-canvas .chart-bar:nth-child(n+8) .chart-bar-label { display: none; }
+        .chart-canvas .chart-bar:nth-child(7n+1) .chart-bar-label { display: block; }
+        .chart-canvas .empty-state { align-self: center; }
+
+        /* Empty state (markup rendered by the script) */
+        .empty-state { display: grid; justify-items: center; gap: var(--sp-2); padding: var(--sp-8) var(--sp-4); text-align: center; color: var(--ink-2); font-size: var(--fs-13); }
+        .empty-state-icon { width: 32px; height: 32px; color: var(--line-strong); stroke: currentColor; fill: none; }
+        .empty-state-title { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-18); color: var(--ink); }
+        .empty-state-description { margin: 0; max-width: 32ch; }
+
+        /* Sites and focus */
+        .sites-section { display: grid; grid-template-columns: 3fr 2fr; gap: var(--sp-4); margin-top: var(--sp-6); }
+        .sites-card h3 { margin-bottom: var(--sp-3); }
+        .site-item { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); min-height: 40px; padding: var(--sp-2) 0; border-top: 1px solid var(--line); font-size: var(--fs-13); }
+        .site-item:first-child { border-top: 0; }
+        .site-domain { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--ink); font-weight: var(--fw-medium); }
+        .site-count { flex: 0 0 auto; display: inline-flex; align-items: center; height: 22px; padding: 0 var(--sp-2); font-size: var(--fs-12); font-weight: var(--fw-semibold); color: var(--ink); background: var(--surface-2); border-radius: var(--r-xs); font-variant-numeric: tabular-nums; clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 0 100%); }
+        .focus-header { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-4); }
+        .focus-icon { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; color: var(--accent); background: var(--accent-soft); border-radius: var(--r-sm); clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%); }
+        .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); }
+        .focus-stat { padding: var(--sp-3); background: var(--surface-3); border-radius: var(--r-sm); }
+        .focus-stat-value { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-24); line-height: 1.1; color: var(--ink); font-variant-numeric: tabular-nums; }
+        .focus-stat-label { margin-top: 2px; font-size: var(--fs-11); font-weight: var(--fw-medium); letter-spacing: var(--tracking-caps); text-transform: uppercase; color: var(--ink-2); }
+
+        /* Share */
+        .share-section { margin-top: var(--sp-6); }
+        .share-header { display: flex; align-items: center; gap: var(--sp-3); margin-bottom: var(--sp-4); }
+        .share-icon { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; color: var(--accent); background: var(--accent-soft); border-radius: var(--r-sm); clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%); }
+        .share-subtitle { margin: 0; font-size: var(--fs-12); color: var(--ink-2); }
+        .share-preview { padding: var(--sp-4) var(--sp-5); background: var(--surface-2); border-radius: var(--r-sm); clip-path: var(--clip-card); }
+        .share-text { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-20); line-height: 1.3; color: var(--ink); }
+        .share-text strong { color: var(--accent); font-weight: 500; }
+        .share-buttons { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-4); }
+        .share-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 34px; padding: 0 var(--sp-4); font: var(--fw-medium) var(--fs-13)/1 var(--font-ui); color: var(--ink); background: var(--surface); border: 1px solid var(--line-strong); border-radius: var(--r-sm); cursor: pointer; }
+        .share-btn:hover { background: var(--surface-3); }
+        .share-btn:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+        .share-btn.copied { color: var(--success); border-color: var(--success); background: var(--success-soft); }
+        .share-cta { margin-top: var(--sp-4); font-size: var(--fs-13); color: var(--ink-2); }
+
+        /* Footer */
+        .footer { margin-top: var(--sp-10); padding-top: var(--sp-4); border-top: 1px solid var(--line); }
+        .footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--sp-3); font-size: var(--fs-13); }
+        .footer-link { color: var(--ink-2); text-decoration: none; }
+        .footer-link:hover { color: var(--ink); text-decoration: underline; }
+
+        @media (max-width: 860px) {
+            .settings-container { padding: 0 var(--sp-4) var(--sp-10); }
+            .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sites-section { grid-template-columns: 1fr; }
+            .chart-canvas { height: 200px; }
+        }
+        @media (max-width: 480px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .logo-text h1 { font-size: var(--fs-28); }
+            .focus-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+    </style>
+</head>
+
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><defs>
+    <symbol id="memory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 8H18l2.5 2.5V16h-17z"/> <path d="M6.5 10.75v2.5M9.5 10.75v2.5M12.5 10.75v2.5"/> </symbol>
+    <symbol id="ico-stats" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 20.5h17"/> <path d="M5 20v-7h2.5L9 14.5V20M10.5 20V8H13l1.5 1.5V20M16 20v-9h2.5l1.5 1.5V20"/> </symbol>
+    <symbol id="tab-sleeping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M7 14h2.5M12 14h2.5"/> </symbol>
+    <symbol id="export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12.5 4h-8A1.5 1.5 0 0 0 3 5.5v13A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V11.5"/> <path d="M10 14l9.5-9.5M14.5 4.5h5v5"/> </symbol>
+    <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/> </symbol>
+    <symbol id="protect" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10v8.5A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V10"/> <path d="M6.5 13V5.5A1.5 1.5 0 0 1 8 4h7l2.5 2.5V13"/> </symbol>
+    <symbol id="drawer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 10H18l2.5 2.5V19h-17z"/> <path d="M10 14.5h4M6 10V6.5A1.5 1.5 0 0 1 7.5 5h8L18 7.5V10"/> </symbol>
+    <symbol id="window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M3 8.5h18M6.5 6.25v.1M9 6.25v.1"/> </symbol>
+    <symbol id="settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M7 10h1.25M11.75 10H17M7 14.5h5M16.25 14.5H17"/> <path d="M10 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM14 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/> </symbol>
+    <symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 20C7 16 3.5 13 3.5 8.5 3.5 6 5.5 4 8 4c1.8 0 3.2 1 4 2.5C12.8 5 14.2 4 16 4c2.5 0 4.5 2 4.5 4.5 0 4.5-3.5 7.5-8.5 11.5z"/> </symbol>
+    <symbol id="restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5 4h14"/> <path d="M4.5 8H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 19.5v-10A1.5 1.5 0 0 1 4.5 8z"/> <path d="M11.5 17.5v-6M9 14l2.5-2.5L14 14"/> </symbol>
+    </defs></svg>
+    <div class="settings-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg class="logo-icon" viewBox="0 0 128 128" aria-hidden="true"><path d="M28 0H92l36 36v64a28 28 0 0 1-28 28H28A28 28 0 0 1 0 100V28A28 28 0 0 1 28 0z" fill="#1F5C47"/><path d="M24 98a6 6 0 0 0 6 6h68a6 6 0 0 0 6-6V56L92 42H58l-6-12H30a6 6 0 0 0-6 6z" fill="#E6D7B8"/><path d="M40 74h30" stroke="#1F5C47" stroke-width="10" stroke-linecap="round"/></svg>
+                    <div class="logo-text">
+                        <h1>Your impact</h1>
+                        <span class="tagline">Memory this browser got back, counted on this computer only</span>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="c-btn" id="exportBtn" type="button">
+                        <svg class="icon"><use href="#export"/></svg>
+                        Export
+                    </button>
+                    <button class="c-btn c-btn-danger" id="resetBtn" type="button">
+                        <svg class="icon"><use href="#close"/></svg>
+                        Reset
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content -->
+        <main class="main">
+            <div>
+                <div class="stats-sync-bar" id="stats-sync-bar">
+                    <div class="stats-sync-info">
+                        <div class="stats-sync-indicator" id="stats-sync-status">
+                            <span class="sync-dot"></span>
+                            <span class="sync-text">Live</span>
+                        </div>
+                        <div class="stats-last-updated" id="stats-last-updated">
+                            Last updated: Just now
+                        </div>
+                    </div>
+                    <button class="stats-refresh-btn" id="stats-refresh-btn" type="button">
+                        <svg class="icon"><use href="#restore"/></svg>
+                        Refresh
+                    </button>
+                </div>
+
+                <!-- Overview tiles -->
+                <div class="dashboard-grid">
+                    <div class="dashboard-card c-stat c-stat-accent">
+                        <div class="card-value" id="totalSaved">0 GB</div>
+                        <div class="card-label">Estimated total saved</div>
+                    </div>
+                    <div class="dashboard-card c-stat">
+                        <div class="card-value" id="tabsSuspended">0</div>
+                        <div class="card-label">Tabs filed</div>
+                    </div>
+                    <div class="dashboard-card c-stat">
+                        <div class="card-value" id="todaySaved">0 MB</div>
+                        <div class="card-label">Estimated saved today</div>
+                    </div>
+                    <div class="dashboard-card c-stat">
+                        <div class="card-value" id="avgDaily">0 MB</div>
+                        <div class="card-label">Daily average</div>
+                    </div>
+                </div>
+
+                <!-- Chart -->
+                <div class="chart-container panel">
+                    <div class="chart-header">
+                        <div>
+                            <h2 class="chart-title">Memory saved over time</h2>
+                            <span class="panel-sub">About 50 MB counted per sleeping tab. Heavy sites free more, simple pages less.</span>
+                        </div>
+                        <div class="chart-period" role="group" aria-label="Period">
+                            <button class="period-btn active" type="button" data-period="7">7 days</button>
+                            <button class="period-btn" type="button" data-period="30">30 days</button>
+                        </div>
+                    </div>
+                    <div class="chart-canvas" id="chartCanvas">
+                        <!-- Bars are rendered by stats-dashboard.js -->
+                    </div>
+                </div>
+
+                <!-- Sites and Focus -->
+                <div class="sites-section">
+                    <div class="sites-card panel">
+                        <h3>Most filed sites</h3>
+                        <div id="topSites">
+                            <div class="site-item">
+                                <span class="site-domain">Loading...</span>
+                                <span class="site-count">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="focus-stats panel">
+                        <div class="focus-header">
+                            <div class="focus-icon">
+                                <svg class="icon icon-20"><use href="#protect"/></svg>
+                            </div>
+                            <div>
+                                <h3>Focus Mode</h3>
+                                <span class="panel-sub">One click files every other tab</span>
+                            </div>
+                        </div>
+                        <div class="focus-grid">
+                            <div class="focus-stat">
+                                <div class="focus-stat-value" id="focusSessions">0</div>
+                                <div class="focus-stat-label">Sessions</div>
+                            </div>
+                            <div class="focus-stat">
+                                <div class="focus-stat-value" id="focusTime">0h</div>
+                                <div class="focus-stat-label">Total time</div>
+                            </div>
+                            <div class="focus-stat">
+                                <div class="focus-stat-value" id="focusWeek">0</div>
+                                <div class="focus-stat-label">This week</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Share -->
+                <div class="share-section">
+                    <div class="share-card panel">
+                        <div class="share-header">
+                            <div class="share-icon">
+                                <svg class="icon icon-20"><use href="#heart"/></svg>
+                            </div>
+                            <div>
+                                <h3 class="share-title">Share your numbers</h3>
+                                <p class="share-subtitle">The text below is all that gets shared.</p>
+                            </div>
+                        </div>
+
+                        <div class="share-preview" id="sharePreview">
+                            <p class="share-text" id="shareText">
+                                Tab Suspender Pro has freed an estimated <strong id="shareMemory">0 MB</strong> of memory by putting <strong id="shareTabs">0</strong> tabs to sleep in my browser.
+                            </p>
+                        </div>
+
+                        <div class="share-buttons">
+                            <button class="share-btn twitter" id="shareTwitter" type="button" title="Share on X">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                                <span>Post on X</span>
+                            </button>
+                            <button class="share-btn linkedin" id="shareLinkedIn" type="button" title="Share on LinkedIn">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                                <span>LinkedIn</span>
+                            </button>
+                            <button class="share-btn facebook" id="shareFacebook" type="button" title="Share on Facebook">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                                <span>Facebook</span>
+                            </button>
+                            <button class="share-btn copy" id="shareCopy" type="button" title="Copy to clipboard">
+                                <svg class="icon"><use href="#export"/></svg>
+                                <span>Copy</span>
+                            </button>
+                        </div>
+
+                        <div class="share-cta">
+                            <p>If it has earned five stars from you, please give them. If it hasn't, tell me what's missing.</p>
+                            <div style="display:flex;flex-wrap:wrap;gap:16px">
+                            <a href="https://chromewebstore.google.com/detail/ofgncemnlblfnocjbojdhamacfffcpnm/reviews" target="_blank" rel="noopener" class="rate-link">Rate it on the Chrome Web Store</a>
+                            <a href="mailto:support@zovo.one?subject=Tab%20Suspender%20Pro%20feedback" class="rate-link">Tell me what's missing</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <a href="https://zovo.one" target="_blank" rel="noopener" class="footer-link">
+                    Made by <strong>Zovo</strong>
+                </a>
+                <a href="settings.html" class="footer-link">Back to Settings</a>
+            </div>
+        </footer>
+    </div>
+
+    <script src="stats-dashboard.js"></script>
+</body>
+
+</html>

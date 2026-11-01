@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" class="tsp-base">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Tab Suspender Pro</title>
+<link rel="icon" href="icons/icon32.png">
+<style>
+  html[data-theme="dark"] { background: #171411; }
+  html:not([data-theme="dark"]) { background: #F6F0E4; }
+</style>
+<script src="theme-init.js"></script>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="design/tokens.css">
+<link rel="stylesheet" href="design/components.css">
+<link rel="stylesheet" href="onboarding.css">
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><defs>
+  <symbol id="memory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 8H18l2.5 2.5V16h-17z"/> <path d="M6.5 10.75v2.5M9.5 10.75v2.5M12.5 10.75v2.5"/> </symbol>
+  <symbol id="suspend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 3H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 14.5v-10A1.5 1.5 0 0 1 4.5 3z"/> <path d="M11.5 6.5v6M9 10l2.5 2.5L14 10"/> <path d="M5 20h14"/> </symbol>
+  <symbol id="restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5 4h14"/> <path d="M4.5 8H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 19.5v-10A1.5 1.5 0 0 1 4.5 8z"/> <path d="M11.5 17.5v-6M9 14l2.5-2.5L14 14"/> </symbol>
+  <symbol id="shield-audio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 9.5H7l4.5-3.5v12L7 14.5H3.5z"/> <path d="M14.5 9.5a3.8 3.8 0 0 1 0 5M17.5 7a7.2 7.2 0 0 1 0 10"/> </symbol>
+  <symbol id="shield-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 7H18l2.5 2.5V17h-17z"/> <path d="M7.5 10.5v3M11 12h6"/> </symbol>
+  <symbol id="shield-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M8.5 3.5H14l2 2V9l2 2.5v2h-12v-2l2-2.5z"/> <path d="M12 13.5V21"/> </symbol>
+  <symbol id="whitelist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M8 13.5l2.5 2.5 5.5-5.5"/> </symbol>
+  <symbol id="timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 20a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/> <path d="M12 6V3.5M9.5 3.5h5M12 13V9.5M12 13l2.5 1.5"/> </symbol>
+  <symbol id="keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 7H18l2.5 2.5V17h-17z"/> <path d="M7 10.5v.1M10.5 10.5v.1M14 10.5v.1M17 10.5v.1M8 14h8"/> </symbol>
+  <symbol id="pro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M6 3.5h9.5L18 6v14.5l-6-4-6 4z"/> </symbol>
+  <symbol id="lifetime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M17.66 6.34A8 8 0 1 0 19.52 9.26"/> <path d="M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/> </symbol>
+  <symbol id="pattern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M12 8v8M8.5 10l7 4M15.5 10l-7 4"/> </symbol>
+  <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5 12.5 9.5 17 19 7.5"/> </symbol>
+  <symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 20C7 16 3.5 13 3.5 8.5 3.5 6 5.5 4 8 4c1.8 0 3.2 1 4 2.5C12.8 5 14.2 4 16 4c2.5 0 4.5 2 4.5 4.5 0 4.5-3.5 7.5-8.5 11.5z"/> </symbol>
+  <symbol id="drawer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3.5 10H18l2.5 2.5V19h-17z"/> <path d="M10 14.5h4M6 10V6.5A1.5 1.5 0 0 1 7.5 5h8L18 7.5V10"/> </symbol>
+  <symbol id="tab-awake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M12 12.25a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 1 0 0-3.5z" fill="currentColor" stroke="none"/> <path d="M7 14h1.5M15.5 14H17"/> </symbol>
+  <symbol id="tab-sleeping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/> <path d="M7 14h2.5M12 14h2.5"/> </symbol>
+  <symbol id="settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M7 10h1.25M11.75 10H17M7 14.5h5M16.25 14.5H17"/> <path d="M10 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM14 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/> </symbol>
+  <symbol id="protect" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M3 10v8.5A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V10"/> <path d="M6.5 13V5.5A1.5 1.5 0 0 1 8 4h7l2.5 2.5V13"/> </symbol>
+  <symbol id="window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/> <path d="M3 8.5h18M6.5 6.25v.1M9 6.25v.1"/> </symbol>
+  <symbol id="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"> <path d="M5.5 20V5.5A1.5 1.5 0 0 1 7 4h1.5L11 6.5V20zM13.5 20V5.5A1.5 1.5 0 0 1 15 4h1.5L19 6.5V20z"/> </symbol>
+  </defs></svg>
+
+<!-- top nav -->
+<nav class="topnav">
+  <div class="brand">
+    <svg width="26" height="26" viewBox="0 0 128 128" aria-hidden="true"><path d="M28 0H92l36 36v64a28 28 0 0 1-28 28H28A28 28 0 0 1 0 100V28A28 28 0 0 1 28 0z" fill="#1F5C47"/><path d="M24 98a6 6 0 0 0 6 6h68a6 6 0 0 0 6-6V56L92 42H58l-6-12H30a6 6 0 0 0-6 6z" fill="#E6D7B8"/><path d="M40 74h30" stroke="#1F5C47" stroke-width="10" stroke-linecap="round"/></svg>
+    <span class="prod">Tab Suspender Pro</span>
+    <span class="by">by Zovo</span>
+  </div>
+  <span class="topnav-note">Welcome</span>
+</nav>
+<div class="progress" aria-hidden="true"><div class="progress-fill" id="progressFill"></div></div>
+
+<div class="stage tsp-pattern" id="stage">
+
+  <!-- STEP 1: what happens -->
+  <section class="step active" data-step="1">
+    <div class="center">
+      <span class="kicker">Welcome</span>
+      <h1 class="tsp-display">Your tabs, <em>filed.</em><br>Your memory, back.</h1>
+      <p class="lede">Tab Suspender Pro puts tabs you haven't touched for a while to sleep. A sleeping tab stays in your tab strip with its title and icon, costs no memory, and one click brings it back where you left it.</p>
+
+      <div class="gauge">
+        <div class="row">
+          <span class="lbl">Rough estimate for your open tabs</span>
+          <span class="val tsp-display" id="gaugeVal">4.2<small>GB</small></span>
+        </div>
+        <div class="c-bar"><div class="track"><div class="fill" id="gaugeFill"></div></div></div>
+        <div class="sub">The estimate counts about 110 MB per open tab. Most of them sit idle until you come back to them.</div>
+      </div>
+
+      <div class="facts">
+        <div class="fact"><svg class="icon icon-20"><use href="#timer"/></svg><span><b>Sleeps after 30 minutes idle</b> by default. You can change that on the next pages.</span></div>
+        <div class="fact"><svg class="icon icon-20"><use href="#tab-sleeping"/></svg><span><b>Stays in the tab strip.</b> Title and icon stay where they are; the page itself is unloaded.</span></div>
+        <div class="fact"><svg class="icon icon-20"><use href="#restore"/></svg><span><b>Wakes with one click</b> and returns to the scroll position you left.</span></div>
+      </div>
+      <p class="pro-teaser"><svg class="icon"><use href="#pro"/></svg><span>Free runs on presets. Pro runs on your rules: <b>$4.99 a month</b> or <b>$99 once</b> for life. <a href="#" id="jumpPro">See what Pro adds</a></span></p>
+    </div>
+  </section>
+
+  <!-- STEP 2: watch it work -->
+  <section class="step" data-step="2">
+    <div class="center">
+      <span class="kicker">Watch it work</span>
+      <h2 class="tsp-display">Reclaim it in <em>one click.</em></h2>
+      <p class="lede">Suspend the tabs you're not using. Their memory comes straight back, and each page loads again the moment you click it.</p>
+
+      <div class="demo">
+        <div class="demo-top">
+          <div class="demo-mem" id="demoMem"><span id="demoNum" class="tsp-display">0</span><small> MB</small></div>
+          <div class="demo-cap" id="demoCap">Tap suspend to reclaim memory</div>
+        </div>
+        <div class="demo-tabs c-list" id="demoTabs">
+          <div class="dtab c-tab c-tab-awake"><span class="fav"></span><span class="nm">Docs: Q3 planning</span><span class="badge active">Active</span></div>
+          <div class="dtab c-tab" data-mb="284"><span class="fav"></span><span class="nm">YouTube: background music</span><span class="idle">Idle 22 min</span><span class="saved">+284 MB</span></div>
+          <div class="dtab c-tab" data-mb="196"><span class="fav"></span><span class="nm">Stack Overflow: 6 tabs</span><span class="idle">Idle 40 min</span><span class="saved">+196 MB</span></div>
+          <div class="dtab c-tab" data-mb="367"><span class="fav"></span><span class="nm">Amazon: cart</span><span class="idle">Idle 1 h</span><span class="saved">+367 MB</span></div>
+        </div>
+        <button class="c-btn c-btn-primary c-btn-block demo-btn" id="demoBtn" type="button">
+          <svg class="icon icon-20"><use href="#suspend"/></svg>
+          Suspend inactive tabs
+        </button>
+      </div>
+      <p class="demo-note">This is a demo with made-up tabs. Your real tabs stay as they are until you close this page.</p>
+    </div>
+  </section>
+
+  <!-- STEP 3: the three protections and the timer -->
+  <section class="step" data-step="3">
+    <div class="center">
+      <span class="kicker">30 seconds to tune it</span>
+      <h2 class="tsp-display">Three protections, <em>one timer.</em></h2>
+      <p class="lede">Sensible defaults are already on. Change anything you like; it saves when you continue.</p>
+
+      <div class="setup">
+        <div class="opt">
+          <label class="opt-lbl" for="setupTimeout">Suspend inactive tabs after</label>
+          <div class="slide-row">
+            <input type="range" id="setupTimeout" class="rng" min="5" max="120" step="5" value="30">
+            <span class="rng-val" id="setupTimeoutValue">30 min</span>
+          </div>
+          <div class="rng-ends"><span>5 min</span><span>2 hr</span></div>
+        </div>
+        <div class="opt">
+          <span class="opt-lbl">Never suspend these sites</span>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" checked data-domain="mail.google.com"><span>Gmail</span></label>
+            <label class="chip"><input type="checkbox" checked data-domain="calendar.google.com"><span>Calendar</span></label>
+            <label class="chip"><input type="checkbox" checked data-domain="docs.google.com"><span>Docs</span></label>
+            <label class="chip"><input type="checkbox" data-domain="github.com"><span>GitHub</span></label>
+            <label class="chip"><input type="checkbox" data-domain="slack.com"><span>Slack</span></label>
+            <label class="chip"><input type="checkbox" data-domain="figma.com"><span>Figma</span></label>
+          </div>
+          <div class="opt-hint">The free version keeps up to 5 sites awake. Pro has no cap.</div>
+        </div>
+        <div class="opt tgls">
+          <label class="tgl-row c-toggle">
+            <svg class="icon icon-20"><use href="#shield-audio"/></svg>
+            <span class="tgl-text"><b>Tabs playing audio</b><small>Music and calls keep playing.</small></span>
+            <input type="checkbox" id="setupAudio" checked><span class="track"></span>
+          </label>
+          <label class="tgl-row c-toggle">
+            <svg class="icon icon-20"><use href="#shield-form"/></svg>
+            <span class="tgl-text"><b>Tabs with unsaved form text</b><small>Regular form fields only. Editors like Gmail or Notion aren't detected.</small></span>
+            <input type="checkbox" id="setupForms" checked><span class="track"></span>
+          </label>
+          <label class="tgl-row c-toggle">
+            <svg class="icon icon-20"><use href="#shield-pin"/></svg>
+            <span class="tgl-text"><b>Pinned tabs</b><small>Anything you pinned stays loaded.</small></span>
+            <input type="checkbox" id="setupPinned" checked><span class="track"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: shortcuts and where things run -->
+  <section class="step" data-step="4">
+    <div class="center">
+      <span class="kicker">Shortcuts</span>
+      <h2 class="tsp-display">Four keys, <em>no popup.</em></h2>
+      <p class="lede">These work from the first tab you open. Change them any time at chrome://extensions/shortcuts.</p>
+
+      <div class="shortcuts">
+        <div class="sc"><span class="keys"><kbd class="c-kbd">Alt</kbd><kbd class="c-kbd">S</kbd></span><span class="sc-text"><b>Suspend this tab</b><small>Files the tab you are on.</small></span></div>
+        <div class="sc"><span class="keys"><kbd class="c-kbd">Alt</kbd><kbd class="c-kbd">Shift</kbd><kbd class="c-kbd">S</kbd></span><span class="sc-text"><b>Suspend all others</b><small>Keeps the current tab, files the rest.</small></span></div>
+        <div class="sc"><span class="keys"><kbd class="c-kbd">Alt</kbd><kbd class="c-kbd">R</kbd></span><span class="sc-text"><b>Restore all tabs</b><small>Pulls every card back out.</small></span></div>
+        <div class="sc"><span class="keys"><kbd class="c-kbd">Alt</kbd><kbd class="c-kbd">W</kbd></span><span class="sc-text"><b>Whitelist this site</b><small>Never suspend the site you are on.</small></span></div>
+      </div>
+
+      <div class="facts facts-plain">
+        <div class="fact"><svg class="icon icon-20"><use href="#drawer"/></svg><span><b>Everything runs in your browser.</b> Suspending, waking and your stats never leave this computer. There are no analytics in the extension.</span></div>
+        <div class="fact"><svg class="icon icon-20"><use href="#pro"/></svg><span><b>One server call, and only with Pro.</b> After you activate a key, the extension confirms it with zovo.one about once a day.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: who builds it -->
+  <section class="step" data-step="5">
+    <div class="center">
+      <span class="kicker">Who builds it</span>
+      <h2 class="tsp-display">Built by someone <em>you can reach.</em></h2>
+      <p class="lede">Tab Suspender Pro has a name and an inbox. Support email goes to the person who writes the code, not a ticket queue.</p>
+
+      <div class="founder">
+        <img class="pic" src="assets/michael-lip.png" alt="Michael Lip" width="72" height="72">
+        <div class="body">
+          <div class="nm">Michael Lip <span class="role">founder, Zovo</span></div>
+          <p class="cred">If a tab won't wake up, a key won't activate, or you wish it did one more thing, write to me. I read the support inbox myself.</p>
+          <div class="socials">
+            <a href="mailto:support@zovo.one">support@zovo.one</a>
+            <a href="https://github.com/theluckystrike" target="_blank" rel="noopener">github.com/theluckystrike</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6: Pro -->
+  <section class="step step-pro" data-step="6">
+    <div class="center">
+      <span class="kicker kicker-pro"><svg class="icon"><use href="#pro"/></svg>Zovo Pro</span>
+      <h2 class="tsp-display">Free runs on presets. <em>Pro runs on your rules.</em></h2>
+      <p class="lede">The free version keeps working as is. Pro removes the limits.</p>
+
+      <div class="pricing pricing-2">
+        <div class="pcard pcard-featured" data-plan-card="lifetime">
+          <div class="pcard-tab">Best value</div>
+          <div class="price"><span class="amt tsp-display">$99</span><span class="per">once</span></div>
+          <div class="price-sub">One payment. Pro in this extension and 14 more Zovo extensions, yours to keep. Less than 20 months of Monthly.</div>
+          <button type="button" class="c-btn c-btn-primary buy-btn" data-buy="lifetime">Get Lifetime for $99</button>
+          <div class="pfeat">
+            <div class="pf"><svg class="icon icon-20"><use href="#timer"/></svg><span class="tx"><b>Your own sleep timer</b><small>Any minute from 1 to 120, not just 15, 30 or 60.</small></span></div>
+            <div class="pf"><svg class="icon icon-20"><use href="#whitelist"/></svg><span class="tx"><b>Unlimited whitelist</b><small>Keep as many sites awake as you need. Free allows 5.</small></span></div>
+            <div class="pf"><svg class="icon icon-20"><use href="#pattern"/></svg><span class="tx"><b>URL patterns</b><small>Rules like docs.google.com/* keep whole paths awake, not just a domain.</small></span></div>
+            <div class="pf"><svg class="icon icon-20"><use href="#protect"/></svg><span class="tx"><b>Focus Mode with no cap</b><small>Put every other tab to sleep in one click, as often as you like. Free allows 3 sessions.</small></span></div>
+            <div class="pf"><svg class="icon icon-20"><use href="#lifetime"/></svg><span class="tx"><b>Pro in 15 Zovo extensions</b><small>One membership, this extension and 14 more.</small></span></div>
+          </div>
+        </div>
+        <div class="pcard" data-plan-card="monthly">
+          <div class="pcard-tab">Monthly</div>
+          <div class="price"><span class="amt tsp-display">$4.99</span><span class="per">a month</span></div>
+          <div class="price-sub">Same Pro features in all 15 extensions. Cancel any time from your dashboard.</div>
+          <button type="button" class="c-btn c-btn-secondary buy-btn" data-buy="monthly">Get Pro for $4.99 a month</button>
+          <div class="reassure-row reassure-col">
+            <span><svg class="icon"><use href="#check"/></svg>Cancel any time</span>
+            <span><svg class="icon"><use href="#check"/></svg>Starts the moment you activate your key</span>
+            <span><svg class="icon"><use href="#check"/></svg>Switch to Lifetime later, any time</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="skip-row">
+        <button class="c-btn c-btn-ghost skip-later" id="skipPay" type="button">Maybe later, keep the free version</button>
+      </div>
+
+      <div class="faq" id="faq">
+        <div class="faq-item"><button class="faq-q" type="button">Do I have to pay to use it?<span class="pm" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>No. The free version suspends tabs, protects audio, forms and pinned tabs, keeps 5 sites awake and has the three timer presets. Pro lifts the timer and whitelist limits, adds URL patterns and removes the Focus Mode cap.</p></div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Can I cancel?<span class="pm" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>Monthly cancels any time from your zovo.one dashboard. Refunds for Monthly and Lifetime follow the refund policy at zovo.one/refund.</p></div></div>
+        <div class="faq-item"><button class="faq-q" type="button">Does it send my browsing anywhere?<span class="pm" aria-hidden="true">+</span></button>
+          <div class="faq-a"><p>No. Suspending and waking happen inside your browser. The only server the extension talks to is Zovo's license check, and only after you activate Pro.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 7: all set -->
+  <section class="step" data-step="7">
+    <div class="center">
+      <span class="done-ic"><svg class="icon icon-24"><use href="#check"/></svg></span>
+      <span class="kicker">Running now</span>
+      <h2 class="tsp-display">You're <em>all set.</em></h2>
+      <p class="lede">Tab Suspender Pro is running quietly in the background. It files idle tabs while you work, and every tab is one click from coming back.</p>
+
+      <div class="pin">
+        <svg class="icon icon-20"><use href="#window"/></svg>
+        <span>Tip. Click the puzzle icon in Chrome's toolbar and pin Tab Suspender Pro so the popup is one click away.</span>
+      </div>
+
+      <div class="signoff">
+        <div class="signoff-head">
+          <img class="pic" src="assets/michael-lip.png" alt="Michael Lip" width="44" height="44">
+          <div class="who">
+            <div class="nm">Michael Lip</div>
+            <div class="role">a note from the person who built this</div>
+          </div>
+        </div>
+        <p>Thank you for installing it. If something breaks, or you wish it did one more thing, tell me at <a href="mailto:support@zovo.one">support@zovo.one</a>. That's the whole deal: you use it, I keep making it better.</p>
+        <div class="sig">Michael</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- bottom nav -->
+<div class="navbar">
+  <div class="navbar-in">
+    <button class="c-btn nbtn back" id="backBtn" type="button" hidden>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>Back
+    </button>
+    <div class="indicator">
+      <span class="counter" id="counter">01 / 07</span>
+      <div class="dots" id="dots" role="tablist" aria-label="Steps">
+        <button class="dot active" type="button" data-step="1" data-label="Welcome" aria-label="Step 1, Welcome"></button>
+        <button class="dot" type="button" data-step="2" data-label="Demo" aria-label="Step 2, Demo"></button>
+        <button class="dot" type="button" data-step="3" data-label="Protections" aria-label="Step 3, Protections"></button>
+        <button class="dot" type="button" data-step="4" data-label="Shortcuts" aria-label="Step 4, Shortcuts"></button>
+        <button class="dot" type="button" data-step="5" data-label="Who" aria-label="Step 5, Who builds it"></button>
+        <button class="dot" type="button" data-step="6" data-label="Pro" aria-label="Step 6, Pro"></button>
+        <button class="dot" type="button" data-step="7" data-label="Done" aria-label="Step 7, Done"></button>
+      </div>
+    </div>
+    <button class="c-btn c-btn-primary nbtn next" id="nextBtn" type="button">
+      <span id="nextLabel">Show me</span>
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+</div>
+
+<script src="onboarding.js"></script>
+</body>
+</html>

@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en" class="tsp-base">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tab Suspender Pro - Settings</title>
+    <script src="theme-init.js"></script>
+    <link rel="stylesheet" href="fonts.css">
+    <link rel="stylesheet" href="design/tokens.css">
+    <link rel="stylesheet" href="design/components.css">
+    <link rel="stylesheet" href="settings.css">
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <!-- Tab Suspender Pro icon sprite, "Card Catalogue".
+       24-unit grid, 1.75 stroke, round caps and joins, fill none unless noted.
+       Corner rule: every container is an index card, 1.5 radius on three corners
+       and a 3-unit chamfer at top-right. Tabs are a raised notch on the top edge.
+       Use: <svg class="icon"><use href="#suspend"/></svg> with the sprite inlined. -->
+  <defs>
+    <symbol id="suspend" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 3H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 14.5v-10A1.5 1.5 0 0 1 4.5 3z"/>
+      <path d="M11.5 6.5v6M9 10l2.5 2.5L14 10"/>
+      <path d="M5 20h14"/>
+    </symbol>
+    <symbol id="restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 4h14"/>
+      <path d="M4.5 8H17l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5h-14A1.5 1.5 0 0 1 3 19.5v-10A1.5 1.5 0 0 1 4.5 8z"/>
+      <path d="M11.5 17.5v-6M9 14l2.5-2.5L14 14"/>
+    </symbol>
+    <symbol id="suspend-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2.5h9l2.5 2.5M6 5.5h9L17.5 8"/>
+      <path d="M4.5 8.5H16l3 3v7a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 3 18.5V10a1.5 1.5 0 0 1 1.5-1.5z"/>
+      <path d="M11 11.5v5M8.5 14.5l2.5 2.5 2.5-2.5"/>
+    </symbol>
+    <symbol id="restore-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 2.5h9l2.5 2.5M6 5.5h9L17.5 8"/>
+      <path d="M4.5 8.5H16l3 3v7a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 3 18.5V10a1.5 1.5 0 0 1 1.5-1.5z"/>
+      <path d="M11 16.5v-5M8.5 13.5 11 11l2.5 2.5"/>
+    </symbol>
+    <symbol id="pause" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5.5 20V5.5A1.5 1.5 0 0 1 7 4h1.5L11 6.5V20zM13.5 20V5.5A1.5 1.5 0 0 1 15 4h1.5L19 6.5V20z"/>
+    </symbol>
+    <symbol id="resume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M8 12h7.5M13 9.5l2.5 2.5-2.5 2.5"/>
+    </symbol>
+    <symbol id="protect" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 10v8.5A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V10"/>
+      <path d="M6.5 13V5.5A1.5 1.5 0 0 1 8 4h7l2.5 2.5V13"/>
+    </symbol>
+    <symbol id="shield-audio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 9.5H7l4.5-3.5v12L7 14.5H3.5z"/>
+      <path d="M14.5 9.5a3.8 3.8 0 0 1 0 5M17.5 7a7.2 7.2 0 0 1 0 10"/>
+    </symbol>
+    <symbol id="shield-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8.5 3.5H14l2 2V9l2 2.5v2h-12v-2l2-2.5z"/>
+      <path d="M12 13.5V21"/>
+    </symbol>
+    <symbol id="shield-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 7H18l2.5 2.5V17h-17z"/>
+      <path d="M7.5 10.5v3M11 12h6"/>
+    </symbol>
+    <symbol id="whitelist" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/>
+      <path d="M8 13.5l2.5 2.5 5.5-5.5"/>
+    </symbol>
+    <symbol id="pattern" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M12 8v8M8.5 10l7 4M15.5 10l-7 4"/>
+    </symbol>
+    <symbol id="timer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/>
+      <path d="M12 6V3.5M9.5 3.5h5M12 13V9.5M12 13l2.5 1.5"/>
+    </symbol>
+    <symbol id="memory" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 8H18l2.5 2.5V16h-17z"/>
+      <path d="M6.5 10.75v2.5M9.5 10.75v2.5M12.5 10.75v2.5"/>
+    </symbol>
+    <symbol id="tab" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/>
+    </symbol>
+    <symbol id="tab-sleeping" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/>
+      <path d="M7 14h2.5M12 14h2.5"/>
+    </symbol>
+    <symbol id="tab-awake" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 20A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4H10l1.5 3H18l3 3v8.5a1.5 1.5 0 0 1-1.5 1.5z"/>
+      <path d="M12 12.25a1.75 1.75 0 1 0 0 3.5 1.75 1.75 0 1 0 0-3.5z" fill="currentColor" stroke="none"/>
+      <path d="M7 14h1.5M15.5 14H17"/>
+    </symbol>
+    <symbol id="settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M7 10h1.25M11.75 10H17M7 14.5h5M16.25 14.5H17"/>
+      <path d="M10 8.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM14 13a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+    </symbol>
+    <symbol id="stats" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 20.5h17"/>
+      <path d="M5 20v-7h2.5L9 14.5V20M10.5 20V8H13l1.5 1.5V20M16 20v-9h2.5l1.5 1.5V20"/>
+    </symbol>
+    <symbol id="keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 7H18l2.5 2.5V17h-17z"/>
+      <path d="M7 10.5v.1M10.5 10.5v.1M14 10.5v.1M17 10.5v.1M8 14h8"/>
+    </symbol>
+    <symbol id="close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>
+    </symbol>
+    <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12.5 9.5 17 19 7.5"/>
+    </symbol>
+    <symbol id="warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M12 8.5V13M12 16v.1"/>
+    </symbol>
+    <symbol id="info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M12 11.5V16M12 8.5v.1"/>
+    </symbol>
+    <symbol id="pro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 3.5h9.5L18 6v14.5l-6-4-6 4z"/>
+    </symbol>
+    <symbol id="lifetime" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M17.66 6.34A8 8 0 1 0 19.52 9.26"/>
+      <path d="M12 8.5a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7z"/>
+    </symbol>
+    <symbol id="export" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12.5 4h-8A1.5 1.5 0 0 0 3 5.5v13A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V11.5"/>
+      <path d="M10 14l9.5-9.5M14.5 4.5h5v5"/>
+    </symbol>
+    <symbol id="import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12.5 4h-8A1.5 1.5 0 0 0 3 5.5v13A1.5 1.5 0 0 0 4.5 20h15a1.5 1.5 0 0 0 1.5-1.5V11.5"/>
+      <path d="M19.5 4.5 11 13M11 8.5V13h4.5"/>
+    </symbol>
+    <symbol id="moon-free" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 10 7 5h8l2 2 2.5 3z"/>
+      <path d="M12 10v7M7 20h10M12 17h-2.5A1.5 1.5 0 0 0 8 18.5V20"/>
+    </symbol>
+    <symbol id="heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20C7 16 3.5 13 3.5 8.5 3.5 6 5.5 4 8 4c1.8 0 3.2 1 4 2.5C12.8 5 14.2 4 16 4c2.5 0 4.5 2 4.5 4.5 0 4.5-3.5 7.5-8.5 11.5z"/>
+    </symbol>
+    <symbol id="drawer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3.5 10H18l2.5 2.5V19h-17z"/>
+      <path d="M10 14.5h4M6 10V6.5A1.5 1.5 0 0 1 7.5 5h8L18 7.5V10"/>
+    </symbol>
+    <symbol id="window" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 4H18l3 3v11.5a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18.5v-13A1.5 1.5 0 0 1 4.5 4z"/>
+      <path d="M3 8.5h18M6.5 6.25v.1M9 6.25v.1"/>
+    </symbol>
+  </defs>
+</svg>
+    <div class="settings-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left">
+                <button class="back-btn" id="backBtn" title="Back to popup" aria-label="Back">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M14.5 6l-6 6 6 6"/>
+                    </svg>
+                </button>
+                <div class="header-title">
+                    <svg class="logo-mark" viewBox="0 0 128 128" width="24" height="24" aria-hidden="true">
+                        <path d="M28 0H92l36 36v64a28 28 0 0 1-28 28H28A28 28 0 0 1 0 100V28A28 28 0 0 1 28 0z" fill="#1F5C47"/>
+                        <path d="M24 98a6 6 0 0 0 6 6h68a6 6 0 0 0 6-6V56L92 42H58l-6-12H30a6 6 0 0 0-6 6z" fill="#E6D7B8"/>
+                        <path d="M40 74h30" stroke="#1F5C47" stroke-width="10" stroke-linecap="round"/>
+                    </svg>
+                    <span class="header-app">Tab Suspender Pro</span>
+                    <span class="header-sep" aria-hidden="true"></span>
+                    <span class="header-page">Settings</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="icon-btn c-btn c-btn-sm" id="exportBtn" title="Export settings">
+                    <svg class="icon" aria-hidden="true"><use href="#export"/></svg>
+                    <span class="icon-btn-text">Export</span>
+                </button>
+                <button class="icon-btn c-btn c-btn-sm" id="importBtn" title="Import settings">
+                    <svg class="icon" aria-hidden="true"><use href="#import"/></svg>
+                    <span class="icon-btn-text">Import</span>
+                </button>
+                <input type="file" id="importFile" accept=".json" style="display:none">
+            </div>
+        </header>
+
+        <div class="layout">
+            <!-- Section nav: a drawer of labelled dividers -->
+            <nav class="section-nav" aria-label="Settings sections">
+                <div class="section-nav-title">Drawers</div>
+                <a class="section-nav-link" href="#sec-profile"><svg class="icon" aria-hidden="true"><use href="#timer"/></svg>Timing</a>
+                <a class="section-nav-link" href="#suspendMethodSection"><svg class="icon" aria-hidden="true"><use href="#drawer"/></svg>Method</a>
+                <a class="section-nav-link" href="#sec-protected"><svg class="icon" aria-hidden="true"><use href="#protect"/></svg>Protected tabs</a>
+                <a class="section-nav-link" href="#sec-whitelist"><svg class="icon" aria-hidden="true"><use href="#whitelist"/></svg>Whitelist</a>
+                <a class="section-nav-link" href="#urlPatternsSection"><svg class="icon" aria-hidden="true"><use href="#pattern"/></svg>URL patterns</a>
+                <a class="section-nav-link" href="#sec-impact"><svg class="icon" aria-hidden="true"><use href="#stats"/></svg>Your impact</a>
+                <a class="section-nav-link" href="#sec-updates"><svg class="icon" aria-hidden="true"><use href="#info"/></svg>Updates</a>
+                <a class="section-nav-link" href="#sec-recovery"><svg class="icon" aria-hidden="true"><use href="#drawer"/></svg>Recovery</a>
+                <a class="section-nav-link" href="#licenseSection"><svg class="icon" aria-hidden="true"><use href="#pro"/></svg>Pro license</a>
+            </nav>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Suspension Profile Section -->
+            <section class="section" id="sec-profile">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#timer"/></svg></div>
+                    <h2 class="section-title">Timing</h2>
+                </div>
+                <p class="section-subtitle">How long a tab sits untouched before it is filed away.</p>
+
+                <div class="profile-selector" id="profileSelector" role="group" aria-label="Suspension profile">
+                    <button class="profile-btn" data-profile="relaxed" data-timeout="60">
+                        <span class="profile-emoji"><svg class="icon icon-20" aria-hidden="true"><use href="#moon-free"/></svg></span>
+                        <span class="profile-name">Relaxed</span>
+                        <span class="profile-desc">60 min</span>
+                    </button>
+                    <button class="profile-btn active" data-profile="balanced" data-timeout="30">
+                        <span class="profile-emoji"><svg class="icon icon-20" aria-hidden="true"><use href="#timer"/></svg></span>
+                        <span class="profile-name">Balanced</span>
+                        <span class="profile-desc">30 min</span>
+                    </button>
+                    <button class="profile-btn" data-profile="aggressive" data-timeout="15">
+                        <span class="profile-emoji"><svg class="icon icon-20" aria-hidden="true"><use href="#suspend-all"/></svg></span>
+                        <span class="profile-name">Aggressive</span>
+                        <span class="profile-desc">15 min</span>
+                    </button>
+                </div>
+
+                <p class="profile-status" id="profileStatus">Right now, tabs sleep after 30 minutes</p>
+
+                <!-- Custom Timing - PRO Feature -->
+                <div class="pro-feature" id="customTimingSection">
+                    <div class="pro-feature-header">
+                        <div class="pro-feature-title">
+                            <svg class="icon" aria-hidden="true"><use href="#timer"/></svg>
+                            <span>Custom timing</span>
+                        </div>
+                        <span class="pro-badge c-badge c-badge-pro">Pro</span>
+                    </div>
+                    <p class="pro-feature-desc">Pick any timer from 1 minute to 2 hours. File tabs twice as fast and keep twice the memory.</p>
+                    <button class="btn-unlock c-btn" id="unlockCustomTimingBtn">
+                        <svg class="icon" aria-hidden="true"><use href="#protect"/></svg>
+                        Get custom timing
+                    </button>
+
+                    <!-- Custom slider (hidden for non-pro) -->
+                    <div class="custom-timing-slider" id="customTimingSlider" style="display: none;">
+                        <input type="range" id="timeout" min="1" max="120" value="30" aria-label="Minutes before a tab is suspended">
+                        <span class="slider-value" id="timeoutValue">30 min</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Suspension Method Section -->
+            <section class="section" id="suspendMethodSection">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#drawer"/></svg></div>
+                    <h2 class="section-title">Method</h2>
+                </div>
+                <p class="section-subtitle">What a filed tab looks like while it waits.</p>
+
+                <div class="method-cards" id="methodCards" role="radiogroup" aria-label="Suspension method">
+                    <label class="method-card" for="suspendModePage">
+                        <input type="radio" name="suspendMode" id="suspendModePage" value="page" checked>
+                        <span class="method-card-body">
+                            <span class="method-name">Zovo suspended page (default)</span>
+                            <span class="method-desc">Shows a light page with the tab title, lets you restore with one click and keeps the scroll position.</span>
+                        </span>
+                    </label>
+                    <label class="method-card" for="suspendModeDiscard">
+                        <input type="radio" name="suspendMode" id="suspendModeDiscard" value="discard">
+                        <span class="method-card-body">
+                            <span class="method-name">Chrome native discard</span>
+                            <span class="method-desc">The tab keeps its title and favicon and uses zero memory. Chrome reloads it when you click it. Scroll position is managed by Chrome.</span>
+                        </span>
+                    </label>
+                </div>
+
+                <div class="method-options">
+                <div class="setting-row" id="restoreScrollRow">
+                    <div class="setting-label">
+                        <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#restore"/></svg></span>
+                        <span id="restoreScrollLabel">Restore scroll position</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="restoreScroll" aria-labelledby="restoreScrollLabel" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+
+                <div class="setting-row setting-row-stacked">
+                    <div class="setting-label">
+                        <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#window"/></svg></span>
+                        <label for="minTabsToSuspend">Only suspend when more than this many tabs are open</label>
+                    </div>
+                    <div class="number-field">
+                        <input type="number" id="minTabsToSuspend" class="number-input c-input" min="0" max="200" step="1" value="0" inputmode="numeric">
+                        <span class="setting-help" id="minTabsHelp">0 = always</span>
+                    </div>
+                </div>
+                </div>
+            </section>
+
+            <!-- Protected Tabs Section -->
+            <section class="section" id="sec-protected">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#protect"/></svg></div>
+                    <h2 class="section-title">Protected tabs</h2>
+                </div>
+
+                <p class="section-subtitle">These stay awake on their own:</p>
+
+                <div class="protection-badges">
+                    <div class="protection-badge active" id="badgeAudio">
+                        <span class="badge-check"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span>
+                        <svg class="icon badge-kind" aria-hidden="true"><use href="#shield-audio"/></svg>
+                        <span>Audio playing</span>
+                    </div>
+                    <div class="protection-badge active" id="badgeForms">
+                        <span class="badge-check"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span>
+                        <svg class="icon badge-kind" aria-hidden="true"><use href="#shield-form"/></svg>
+                        <span>Unsaved forms</span>
+                    </div>
+                    <div class="protection-badge active" id="badgePinned">
+                        <span class="badge-check"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span>
+                        <svg class="icon badge-kind" aria-hidden="true"><use href="#shield-pin"/></svg>
+                        <span>Pinned tabs</span>
+                    </div>
+                    <div class="protection-badge active" id="badgeActive">
+                        <span class="badge-check"><svg class="icon" aria-hidden="true"><use href="#check"/></svg></span>
+                        <svg class="icon badge-kind" aria-hidden="true"><use href="#tab-awake"/></svg>
+                        <span>Active tab</span>
+                    </div>
+                </div>
+
+                <button class="customize-toggle" id="customizeProtectionBtn" aria-controls="protectionSettings">
+                    <span>Customize protections</span>
+                    <svg class="chevron" id="protectionChevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M6 9.5l6 6 6-6"/>
+                    </svg>
+                </button>
+
+                <!-- Collapsed protection settings -->
+                <div class="protection-settings" id="protectionSettings" style="display: none;">
+                    <div class="setting-row">
+                        <div class="setting-label">
+                            <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#shield-audio"/></svg></span>
+                            <span>Never suspend audio tabs</span>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="neverAudio" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-label">
+                            <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#shield-form"/></svg></span>
+                            <span>Never suspend unsaved forms</span>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="neverForms" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-label">
+                            <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#shield-pin"/></svg></span>
+                            <span>Never suspend pinned tabs</span>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="neverPinned" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-label">
+                            <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#tab-awake"/></svg></span>
+                            <span>Never suspend active tab</span>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="neverActive" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-row">
+                        <div class="setting-label">
+                            <span class="setting-icon"><svg class="icon" aria-hidden="true"><use href="#restore"/></svg></span>
+                            <span>Auto-restore on focus</span>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="autoRestore" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Whitelist Section -->
+            <section class="section" id="sec-whitelist">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#whitelist"/></svg></div>
+                    <h2 class="section-title">Whitelist</h2>
+                </div>
+                <p class="section-subtitle">Sites on this list are never filed away.</p>
+
+                <button class="btn-add-current c-btn" id="addCurrentSiteBtn">
+                    <svg class="icon" aria-hidden="true"><use href="#whitelist"/></svg>
+                    Add current site
+                </button>
+
+                <div class="whitelist-items" id="whitelistItems">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="add-manual">
+                    <input type="text" id="newDomain" placeholder="Add a domain, for example mail.google.com" class="domain-input c-input" spellcheck="false" autocomplete="off">
+                    <button class="btn-add c-btn" id="addDomainBtn">Add</button>
+                </div>
+            </section>
+
+            <!-- URL Patterns Section -->
+            <section class="section" id="urlPatternsSection">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#pattern"/></svg></div>
+                    <h2 class="section-title">URL patterns</h2>
+                    <div class="whitelist-counter" id="patternsCounter"></div>
+                </div>
+
+                <p class="section-subtitle">Tabs whose full address matches a pattern are never suspended. Use * for any run of characters. Examples: <code>https://docs.google.com/*</code> and <code>*://*.atlassian.net/*</code></p>
+
+                <div class="whitelist-items" id="patternItems">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="add-manual">
+                    <input type="text" id="newPattern" placeholder="https://docs.google.com/*" class="domain-input c-input" maxlength="200" spellcheck="false" autocomplete="off">
+                    <button class="btn-add c-btn" id="addPatternBtn" title="Add pattern">Add</button>
+                </div>
+            </section>
+
+            <!-- Your Impact Section -->
+            <section class="section impact-section" id="sec-impact">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#stats"/></svg></div>
+                    <h2 class="section-title">Your impact</h2>
+                </div>
+
+                <div class="impact-card">
+                    <div class="impact-trophy"><svg class="icon icon-24" aria-hidden="true"><use href="#memory"/></svg></div>
+                    <div class="impact-value tsp-display" id="impactValue">0 MB</div>
+                    <div class="impact-label">Memory reclaimed so far</div>
+                    <div class="impact-rank" id="impactRank"></div>
+                </div>
+
+                <button class="btn-view-stats c-btn" id="viewStatsBtn">
+                    <svg class="icon" aria-hidden="true"><use href="#stats"/></svg>
+                    View full stats
+                </button>
+            </section>
+
+            <!-- Updates Section -->
+            <section class="section" id="sec-updates">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#info"/></svg></div>
+                    <h2 class="section-title">Updates</h2>
+                </div>
+                <div class="setting-row">
+                    <div class="setting-label">
+                        <span id="showWhatsNewLabel">Show what's new after an update</span>
+                    </div>
+                    <label class="toggle">
+                        <input type="checkbox" id="showWhatsNew" aria-labelledby="showWhatsNewLabel" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <button class="btn-view-stats c-btn" id="openWhatsNewBtn">
+                    <svg class="icon" aria-hidden="true"><use href="#info"/></svg>
+                    See what's new
+                </button>
+            </section>
+
+            <!-- Recovery: the tab ledger -->
+            <section class="section" id="sec-recovery">
+                <div class="section-header">
+                    <div class="section-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#drawer"/></svg></div>
+                    <h2 class="section-title">Recovery</h2>
+                </div>
+                <p class="section-subtitle">Every tab filed by version 1.0.37 or later is written here first, so you can reopen it after a crash or a restart.</p>
+                <div class="ledger-actions">
+                    <button class="c-btn c-btn-sm" id="ledgerOpenTodayBtn">Open all from today</button>
+                    <button class="c-btn c-btn-sm" id="ledgerExportBtn">Export JSON</button>
+                    <button class="c-btn c-btn-sm" id="ledgerClearBtn">Clear</button>
+                </div>
+                <div class="ledger-items" id="ledgerItems"></div>
+                <p class="ledger-empty" id="ledgerEmpty" hidden>No filed tabs yet. Tabs appear here the moment they are put to sleep.</p>
+            </section>
+
+            <!-- License Section -->
+            <section class="section license-section" id="licenseSection">
+                <div class="license-prompt" id="licensePrompt">
+                    <div class="license-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#pro"/></svg></div>
+                    <div class="license-info">
+                        <span class="license-title">Pro</span>
+                        <span class="license-desc">Custom timer, unlimited whitelist, URL patterns and Focus mode. Already have a key? Activate it here.</span>
+                    </div>
+                    <button class="btn-activate c-btn" id="activateLicenseBtn">Activate</button>
+                </div>
+
+                <div class="license-active" id="licenseActive" style="display: none;">
+                    <div class="license-icon"><svg class="icon icon-24" aria-hidden="true"><use href="#check"/></svg></div>
+                    <div class="license-info">
+                        <span class="license-title">Pro license active</span>
+                        <span class="license-desc" id="licenseKeyDisplay">ZOVO-****-****-****</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <a href="https://zovo.one" target="_blank" class="footer-link">
+                Powered by Zovo
+            </a>
+            <span class="version" id="versionLabel">v1.0.37</span>
+        </footer>
+    </div>
+
+    <!-- License Activation Modal -->
+    <div class="modal-overlay" id="licenseModal" style="display: none;">
+        <div class="modal-content" role="dialog" aria-labelledby="licenseModalTitle">
+            <button class="modal-close" id="licenseModalClose" aria-label="Close">
+                <svg class="icon" aria-hidden="true"><use href="#close"/></svg>
+            </button>
+            <h2 class="modal-title" id="licenseModalTitle">Activate Pro</h2>
+            <p class="modal-desc">Enter your license key to turn on every Pro feature.</p>
+            <input
+                type="text"
+                id="licenseInput"
+                class="modal-input c-input"
+                placeholder="ZOVO-XXXX-XXXX-XXXX-XXXX"
+                spellcheck="false"
+                autocomplete="off"
+            />
+            <div id="licenseStatus" class="license-status"></div>
+            <button id="activateBtn" class="btn-primary c-btn c-btn-primary c-btn-block">Activate license</button>
+            <a href="https://zovo.one/pricing" target="_blank" class="modal-link">Get a license</a>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div class="toast" id="toast">
+        <span class="toast-message" id="toastMessage"></span>
+    </div>
+
+    <script src="settings.js"></script>
+<script src="zovo-whats-new/config.js"></script><script src="zovo-whats-new/zovo-cards.js" data-zovo-mount="settings"></script>
+</body>
+
+</html>

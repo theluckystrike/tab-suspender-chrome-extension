@@ -1,0 +1,14 @@
+{
+  "extActionTitle": {
+    "description": "Tooltip for the browser action button",
+    "message": "Tab Suspender Pro"
+  },
+  "extDescription": {
+    "description": "Extension description shown in Chrome Web Store",
+    "message": "ระงับแท็บที่ไม่ได้ใช้งานโดยอัตโนมัติเพื่อประหยัดหน่วยความจำ การปกป้องอัจฉริยะสำหรับเสียง วิดีโอคอล และแบบฟอร์ม"
+  },
+  "extName": {
+    "description": "Extension name shown in Chrome",
+    "message": "Tab Suspender Pro - Auto-Suspend Inactive Tabs"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "extActionTitle": {
+    "description": "Tooltip for the browser action button",
+    "message": "Tab Suspender Pro"
+  },
+  "extDescription": {
+    "description": "Extension description shown in Chrome Web Store",
+    "message": "मेमरी वाचवण्यासाठी निष्क्रिय टॅब स्वयंचलितपणे स्थगित करा. ऑडिओ, व्हिडिओ कॉल आणि फॉर्मसाठी स्मार्ट संरक्षण."
+  },
+  "extName": {
+    "description": "Extension name shown in Chrome",
+    "message": "Tab Suspender Pro - Auto-Suspend Inactive Tabs"
+  }
+}

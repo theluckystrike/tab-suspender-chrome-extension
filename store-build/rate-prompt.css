@@ -1,0 +1,10 @@
+/* Rating prompt card (rate-prompt.js, 1.0.39). Uses design/tokens.css only. */
+.zrp-card {
+  margin: 0 var(--sp-4) var(--sp-4); padding: var(--sp-3) var(--sp-4);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md);
+  box-shadow: var(--shadow-1); color: var(--ink); font-family: var(--font-ui);
+}
+.zrp-line { margin: 0 0 var(--sp-2); font-size: var(--fs-13); line-height: var(--lh-body); color: var(--ink); }
+.zrp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.zrp-card a.c-btn { text-decoration: none; }
+.zrp-close { margin-left: auto; }

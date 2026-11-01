@@ -1,0 +1,165 @@
+/* Tab Suspender Pro design tokens: "Card Catalogue"
+   One file, two themes. Light is the default; dark applies via
+   prefers-color-scheme when html has no data-theme, and always via
+   html[data-theme="dark"] (theme-init.js sets that attribute).
+   Fonts: Fraunces (display, 20 px and up) and IBM Plex Sans (UI).
+   Load from Google Fonts or self-host the two woff2 files; the stacks
+   below fall back to system faces without layout shift at UI sizes. */
+
+:root {
+  color-scheme: light;
+
+  /* Families */
+  --font-ui: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Colour roles (light): paper desk, manila cards, lamp-green ink */
+  --bg: #F6F0E4;          /* paper */
+  --surface: #FFFCF5;     /* a fresh card */
+  --surface-2: #E6D7B8;   /* manila divider */
+  --surface-3: #EFE6D3;   /* worn paper, hover rows */
+  --ink: #1E1B16;         /* text */
+  --ink-2: #5A5246;       /* secondary text */
+  --ink-3: #7E7465;       /* placeholders, only at 14 px and above */
+  --accent: #1F5C47;      /* lamp green, primary action */
+  --accent-strong: #184A39;
+  --accent-soft: #DCE8DF; /* tint behind accent text */
+  --accent-ink: #F6F0E4;  /* text on accent */
+  --success: #246B40;
+  --success-soft: #DCEBDD;
+  --warn: #7A5214;        /* text-safe brass */
+  --warn-fill: #B07D2C;   /* brass for fills and the Pro badge */
+  --warn-soft: #F3E6C8;
+  --danger: #8A2E2A;      /* oxblood */
+  --danger-soft: #F1DCD8;
+  --line: #D9CDB5;        /* card edge */
+  --line-strong: #B9AB8E;
+  --focus: #1F5C47;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+  --pattern-ink: #1E1B16;
+
+  /* Spacing (4 px base) */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+
+  /* Radius: a card has small rounded corners; the chamfer is 6 px */
+  --r-xs: 2px; --r-sm: 4px; --r-md: 6px; --r-lg: 10px; --r-xl: 16px; --r-pill: 999px;
+  --chamfer: 6px;
+  --clip-card: polygon(0 0, calc(100% - var(--chamfer)) 0, 100% var(--chamfer), 100% 100%, 0 100%);
+
+  /* Shadow: paper on a desk, warm and short */
+  --shadow-1: 0 1px 0 rgba(30, 27, 22, 0.06), 0 1px 2px rgba(30, 27, 22, 0.08);
+  --shadow-2: 0 1px 0 rgba(30, 27, 22, 0.05), 0 4px 10px -2px rgba(30, 27, 22, 0.14);
+  --shadow-3: 0 2px 0 rgba(30, 27, 22, 0.05), 0 14px 28px -10px rgba(30, 27, 22, 0.28);
+
+  /* Type scale (px) and line heights */
+  --fs-11: 11px; --fs-12: 12px; --fs-13: 13px; --fs-14: 14px; --fs-16: 16px;
+  --fs-18: 18px; --fs-20: 20px; --fs-24: 24px; --fs-28: 28px; --fs-32: 32px; --fs-40: 40px;
+  --lh-tight: 1.15; --lh-ui: 1.4; --lh-body: 1.55;
+  --tracking-caps: 0.06em;
+  --fw-regular: 400; --fw-medium: 500; --fw-semibold: 600;
+
+  /* Motion: a drawer slides; nothing bounces */
+  --dur-fast: 120ms; --dur-base: 200ms; --dur-slow: 360ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.3, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Pattern: staggered divider tabs, a 96 x 72 tile. Use on bg only,
+     never behind body text. Opacity is baked in (stroke-opacity). */
+  --pattern-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='72' viewBox='0 0 96 72'%3E%3Cg fill='none' stroke='%231E1B16' stroke-opacity='.11' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M4 22V2h20l2 4h62l4 4v12z'/%3E%3Cpath d='M4 46V30h30l2-4h18l2 4h32l4 4v12z'/%3E%3Cpath d='M4 70V54h60l2-4h22l4 4v16z'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern: var(--pattern-tile);
+  --pattern-size: 96px 72px;
+  --pattern-fade: linear-gradient(180deg, rgba(246, 240, 228, 0) 0%, var(--bg) 100%);
+}
+
+/* Dark: the inside of a walnut drawer, brass fittings, the lamp still on */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #171411;
+    --surface: #221E19;
+    --surface-2: #2C2721;
+    --surface-3: #352F27;
+    --ink: #F1EAD9;
+    --ink-2: #BDB2A0;
+    --ink-3: #8E8474;
+    --accent: #5FB58F;
+    --accent-strong: #7CC7A3;
+    --accent-soft: #233A30;
+    --accent-ink: #10231B;
+    --success: #7CC79A;
+    --success-soft: #1F3328;
+    --warn: #D9A54A;
+    --warn-fill: #B07D2C;
+    --warn-soft: #3A2E17;
+    --danger: #E07A6E;
+    --danger-soft: #3D2320;
+    --line: #3A332B;
+    --line-strong: #544A3E;
+    --focus: #7CC7A3;
+    --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+    --pattern-ink: #F1EAD9;
+    --shadow-1: 0 1px 0 rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.35);
+    --shadow-2: 0 1px 0 rgba(0, 0, 0, 0.3), 0 4px 10px -2px rgba(0, 0, 0, 0.5);
+    --shadow-3: 0 2px 0 rgba(0, 0, 0, 0.3), 0 14px 28px -10px rgba(0, 0, 0, 0.7);
+    --pattern-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='72' viewBox='0 0 96 72'%3E%3Cg fill='none' stroke='%23F1EAD9' stroke-opacity='.08' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M4 22V2h20l2 4h62l4 4v12z'/%3E%3Cpath d='M4 46V30h30l2-4h18l2 4h32l4 4v12z'/%3E%3Cpath d='M4 70V54h60l2-4h22l4 4v16z'/%3E%3C/g%3E%3C/svg%3E");
+    --pattern-fade: linear-gradient(180deg, rgba(23, 20, 17, 0) 0%, var(--bg) 100%);
+  }
+}
+:root[data-theme="dark"], .theme-dark {
+  color-scheme: dark;
+  --bg: #171411;
+  --surface: #221E19;
+  --surface-2: #2C2721;
+  --surface-3: #352F27;
+  --ink: #F1EAD9;
+  --ink-2: #BDB2A0;
+  --ink-3: #8E8474;
+  --accent: #5FB58F;
+  --accent-strong: #7CC7A3;
+  --accent-soft: #233A30;
+  --accent-ink: #10231B;
+  --success: #7CC79A;
+  --success-soft: #1F3328;
+  --warn: #D9A54A;
+  --warn-fill: #B07D2C;
+  --warn-soft: #3A2E17;
+  --danger: #E07A6E;
+  --danger-soft: #3D2320;
+  --line: #3A332B;
+  --line-strong: #544A3E;
+  --focus: #7CC7A3;
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus);
+  --pattern-ink: #F1EAD9;
+  --shadow-1: 0 1px 0 rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 1px 0 rgba(0, 0, 0, 0.3), 0 4px 10px -2px rgba(0, 0, 0, 0.5);
+  --shadow-3: 0 2px 0 rgba(0, 0, 0, 0.3), 0 14px 28px -10px rgba(0, 0, 0, 0.7);
+  --pattern-tile: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='72' viewBox='0 0 96 72'%3E%3Cg fill='none' stroke='%23F1EAD9' stroke-opacity='.08' stroke-width='1' stroke-linejoin='round'%3E%3Cpath d='M4 22V2h20l2 4h62l4 4v12z'/%3E%3Cpath d='M4 46V30h30l2-4h18l2 4h32l4 4v12z'/%3E%3Cpath d='M4 70V54h60l2-4h22l4 4v16z'/%3E%3C/g%3E%3C/svg%3E");
+  --pattern-fade: linear-gradient(180deg, rgba(23, 20, 17, 0) 0%, var(--bg) 100%);
+}
+
+/* Base: apply once per page */
+.tsp-base, .tsp-base body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: var(--fs-13);
+  line-height: var(--lh-ui);
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+.tsp-pattern {
+  background-color: var(--bg);
+  background-image: var(--pattern-fade), var(--pattern);
+  background-size: 100% 100%, var(--pattern-size);
+  background-repeat: no-repeat, repeat;
+}
+.tsp-display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-variation-settings: "opsz" 72, "SOFT" 40;
+  letter-spacing: -0.01em;
+  line-height: var(--lh-tight);
+}
