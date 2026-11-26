@@ -3,7 +3,7 @@
  * Simplified, bulletproof version
  */
 
-importScripts('lib/domain-match.js');
+importScripts('lib/domain-match.js', 'lib/suspended-url.js');
 
 console.log('Tab Suspender: Background starting...');
 
@@ -486,8 +486,7 @@ function isInternalPage(url) {
 }
 
 function isSuspendedPage(url) {
-    if (!url) return false;
-    return url.includes('suspended.html');
+    return TabSuspenderSuspendedUrl.isSuspendedUrl(url, chrome.runtime.getURL(''));
 }
 
 // ============================================================================

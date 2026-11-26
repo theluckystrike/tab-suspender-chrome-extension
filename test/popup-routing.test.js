@@ -68,6 +68,7 @@ function loadPopup({ tabs = [], responses = {} } = {}) {
         URL,
         URLSearchParams
     });
+    vm.runInContext(fs.readFileSync(path.join(__dirname, '..', 'src', 'lib', 'suspended-url.js'), 'utf8'), context);
     vm.runInContext(popupSource, context);
 
     return { context, sent, updated, actionButtons };
