@@ -113,3 +113,6 @@ MIT License — free to use, modify, and distribute. See [LICENSE](LICENSE) for 
 ---
 
 Made with ❤️ by [Zovo](https://zovo.one) — Open source Chrome extensions for developers and productivity
+
+---
+**Offline IDE Viewers by Zovo:** Browse 146 local-first extensions for Cursor, Windsurf, and VS Code at [vscode.zovo.one](https://vscode.zovo.one/) and read format guides at [vscode.zovo.one/guides/](https://vscode.zovo.one/guides/).
